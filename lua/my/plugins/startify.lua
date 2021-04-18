@@ -40,3 +40,7 @@ vim.g.startify_bookmarks = {
   {p = "~/AppData/Local/nvim/lua/my/plugins/init.lua"},
   {d = "D:/School/Current/deadlines.md"}
 }
+
+vim.g.startify_commands = {
+  {u = {"Update Plugins", ":PackerUpdate"} }
+}
