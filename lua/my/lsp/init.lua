@@ -1,14 +1,11 @@
 -- Stop lsp diagnostics from showing virtual text
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
-      virtual_text = true,
-      update_in_insert = false,
-      underline = true,
-      signs = true
-    }
-  )
+  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    update_in_insert = false,
+    underline = true,
+    signs = true
+  })
 
 local lspconfig = require("lspconfig")
 
@@ -32,9 +29,7 @@ require("lspconfig/configs").emmet_ls = {
   default_config = {
     cmd = {"emmet-ls", "--stdio"},
     filetypes = {"html", "css"},
-    root_dir = function()
-      return vim.loop.cwd()
-    end,
+    root_dir = function() return vim.loop.cwd() end,
     settings = {}
   }
 }
@@ -60,7 +55,8 @@ if vim.fn.has("win32") then
   luapath = os.getenv("USERPROFILE") .. "/language_servers/lua-language-server"
   luabin = luapath .. "/bin/Windows/lua-language-server.exe"
 else
-  luapath = "/home/" .. os.getenv("USER") .. "/.local/share/nvim/lua/sumneko_lua"
+  luapath = "/home/" .. os.getenv("USER") ..
+              "/.local/share/nvim/lua/sumneko_lua"
   luabin = luapath .. "/bin/Linux/lua-language-server"
 end
 
@@ -86,9 +82,7 @@ lspconfig.sumneko_lua.setup {
         },
         maxPreload = 10000
       },
-      telemetry = {
-        enable = false
-      }
+      telemetry = {enable = false}
     }
   }
 }

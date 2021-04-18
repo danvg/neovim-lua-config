@@ -1,5 +1,5 @@
 -- edge, gruvbox, one-nvim, space-nvim ...
-local theme = { name = "gruvbox" }
+local theme = {name = "gruvbox"}
 vim.o.background = "dark"
 
 if theme.name == "gruvbox" then

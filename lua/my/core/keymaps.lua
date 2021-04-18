@@ -54,7 +54,8 @@ map("n", "<leader>fm", ":Telescope media_files<CR>")
 map("n", "<leader>fh", ":Telescope help_tags<CR>")
 map("n", "<leader>fc", ":Telescope colorscheme<CR>")
 map("n", "<leader>fa", ":lua require('my.core.functions').search_dotfiles()<CR>")
-map("n", "<leader>fn", ":lua require('my.core.functions').search_nvim()<CR>")
+map("n", "<leader>fn",
+    ":lua require('my.core.functions').search_nvim_config()<CR>")
 map("n", "<leader>fb", ":Telescope buffers<CR>")
 
 -- LSP

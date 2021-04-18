@@ -1,6 +1,21 @@
-require("bufferline").setup{
+require("bufferline").setup {
   options = {
-    numbers = "buffer_id",          -- show buffer id to the left
-    enforce_regular_tabs = true     -- all tabs in the same size
+    view = "multiwindow",
+    numbers = "none", -- buffer_id
+    number_style = "superscript",
+    buffer_close_icon = "",
+    modified_icon = "●",
+    close_icon = "",
+    left_trunc_marker = "",
+    right_trunc_marker = "",
+    max_name_length = 14,
+    max_prefix_length = 13,
+    tab_size = 18,
+    show_buffer_close_icons = true,
+    show_close_icon = true,
+    show_tab_indicators = true,
+    enforce_regular_tabs = true,
+    separator_style = "thick",
+    always_show_bufferline = true
   }
 }

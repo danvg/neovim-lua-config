@@ -1,38 +1,26 @@
-vim.fn.sign_define(
-  "LspDiagnosticsSignError",
-  {
-    texthl = "LspDiagnosticsSignError",
-    text = "",
-    numhl = "LspDiagnosticsSignError"
-  }
-)
+vim.fn.sign_define("LspDiagnosticsSignError", {
+  texthl = "LspDiagnosticsSignError",
+  text = "",
+  numhl = "LspDiagnosticsSignError"
+})
 
-vim.fn.sign_define(
-  "LspDiagnosticsSignWarning",
-  {
-    texthl = "LspDiagnosticsSignWarning",
-    text = "",
-    numhl = "LspDiagnosticsSignWarning"
-  }
-)
+vim.fn.sign_define("LspDiagnosticsSignWarning", {
+  texthl = "LspDiagnosticsSignWarning",
+  text = "",
+  numhl = "LspDiagnosticsSignWarning"
+})
 
-vim.fn.sign_define(
-  "LspDiagnosticsSignInformation",
-  {
-    texthl = "LspDiagnosticsSignInformation",
-    text = "",
-    numhl = "LspDiagnosticsSignInformation"
-  }
-)
+vim.fn.sign_define("LspDiagnosticsSignInformation", {
+  texthl = "LspDiagnosticsSignInformation",
+  text = "",
+  numhl = "LspDiagnosticsSignInformation"
+})
 
-vim.fn.sign_define(
-  "LspDiagnosticsSignHint",
-  {
-    texthl = "LspDiagnosticsSignHint",
-    text = "",
-    numhl = "LspDiagnosticsSignHint"
-  }
-)
+vim.fn.sign_define("LspDiagnosticsSignHint", {
+  texthl = "LspDiagnosticsSignHint",
+  text = "",
+  numhl = "LspDiagnosticsSignHint"
+})
 
 require("compe").setup {
   enabled = true,
@@ -62,8 +50,7 @@ require("compe").setup {
 }
 
 -- symbols for autocomplete
-require("lspkind").init(
-{
+require("lspkind").init({
   with_text = true,
   symbol_map = {
     Text = "  ",
@@ -87,8 +74,7 @@ require("lspkind").init(
     Constant = "   ",
     Struct = "   "
   }
-}
-)
+})
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -128,7 +114,8 @@ _G.s_tab_complete = function()
   end
 end
 
-require("my.core.functions").map("i", "<CR>", "compe#confirm('<CR>')", {expr = true})
+require("my.core.functions").map("i", "<CR>", "compe#confirm('<CR>')",
+                                 {expr = true})
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})

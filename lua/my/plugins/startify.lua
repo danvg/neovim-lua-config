@@ -1,16 +1,13 @@
 local custom_header = {
-"",
-"",
-"                                       ██            ",
-"                                      ░░             ",
-"    ███████   █████   ██████  ██    ██ ██ ██████████ ",
-"   ░░██░░░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██",
-"    ░██  ░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██",
-"    ░██  ░██░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██",
-"    ███  ░██░░██████░░██████   ░░██   ░██ ███ ░██ ░██",
-"   ░░░   ░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░ ",
-"",
-"",
+  "", "", "                                       ██            ",
+  "                                      ░░             ",
+  "    ███████   █████   ██████  ██    ██ ██ ██████████ ",
+  "   ░░██░░░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██",
+  "    ░██  ░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██",
+  "    ░██  ░██░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██",
+  "    ███  ░██░░██████░░██████   ░░██   ░██ ███ ░██ ░██",
+  "   ░░░   ░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░ ",
+  "", ""
 }
 
 vim.g.webdevicons_enable_startify = 1
@@ -32,14 +29,14 @@ vim.g.startify_custom_header = header ]]
 
 vim.g.startify_lists = {
   -- { type = "dir", header = {"   MRU " .. vim.fn.getcwd()} },
-  { type = "bookmarks", header = {"   Bookmarks"} },
-  { type = "files", header = {"   Most recent files"} },
-  { type = "sessions", header = {"   Sessions"} },
-  { type = "commands", header = {"   Commands"} },
+  {type = "bookmarks", header = {"   Bookmarks"}},
+  {type = "files", header = {"   Most recent files"}},
+  {type = "sessions", header = {"   Sessions"}},
+  {type = "commands", header = {"   Commands"}}
 }
 
 vim.g.startify_bookmarks = {
-  { i = "~/AppData/Local/nvim/init.lua"},
-  { p = "~/AppData/Local/nvim/lua/my/plugins/init.lua"},
-  { d = "D:/School/Current/deadlines.md"},
+  {i = "~/AppData/Local/nvim/init.lua"},
+  {p = "~/AppData/Local/nvim/lua/my/plugins/init.lua"},
+  {d = "D:/School/Current/deadlines.md"}
 }
