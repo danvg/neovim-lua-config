@@ -62,7 +62,7 @@ return require("packer").startup(function()
   -- Themes
   use {
     {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}, "sainnhe/edge",
-    "Th3Whit3Wolf/one-nvim", "Th3Whit3Wolf/space-nvim"
+    "Th3Whit3Wolf/one-nvim", "Th3Whit3Wolf/space-nvim", "fneu/breezy"
   }
 
   -- Start screen
