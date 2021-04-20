@@ -9,7 +9,7 @@ colors.line_bg = "#1d2021"
 gls.left[1] = {
   RainbowRed = {
     provider = function() return "▊ " end,
-    highlight = {colors.blue, colors.line_bg}
+    highlight = {colors.line_bg, colors.line_bg}
   }
 }
 
@@ -179,7 +179,7 @@ gls.right[6] = {
   DiffAdd = {
     provider = "DiffAdd",
     condition = condition.hide_in_width,
-    icon = "  ",
+    icon = "  ",
     highlight = {colors.green, colors.line_bg}
   }
 }
@@ -188,7 +188,7 @@ gls.right[7] = {
   DiffModified = {
     provider = "DiffModified",
     condition = condition.hide_in_width,
-    icon = " 柳",
+    icon = "  ",
     highlight = {colors.orange, colors.line_bg}
   }
 }
@@ -197,7 +197,7 @@ gls.right[8] = {
   DiffRemove = {
     provider = "DiffRemove",
     condition = condition.hide_in_width,
-    icon = "  ",
+    icon = "  ",
     highlight = {colors.red, colors.line_bg}
   }
 }
@@ -205,7 +205,7 @@ gls.right[8] = {
 gls.right[9] = {
   RainbowBlue = {
     provider = function() return "▊" end,
-    highlight = {colors.blue, colors.line_bg}
+    highlight = {colors.line_bg, colors.line_bg}
   }
 }
 
@@ -229,6 +229,6 @@ gls.short_line_left[2] = {
 gls.short_line_right[1] = {
   BufferIcon = {
     provider = "BufferIcon",
-    highlight = {colors.fg, colors.line_bg}
+    highlight = {colors.blue, colors.line_bg}
   }
 }
