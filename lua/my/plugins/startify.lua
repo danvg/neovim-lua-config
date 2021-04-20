@@ -35,10 +35,12 @@ vim.g.startify_lists = {
   {type = "commands", header = {"   Commands"}}
 }
 
+local funcs = require("my.core.functions")
 vim.g.startify_bookmarks = {
-  {i = "~/AppData/Local/nvim/init.lua"},
-  {p = "~/AppData/Local/nvim/lua/my/plugins/init.lua"},
-  {d = "D:/School/Current/deadlines.md"}
+  {i = funcs.get_init_filename()},
+  {p = funcs.get_plugins_filename()},
+  {d = funcs.get_todo_filename()},
+  {t = vim.fn.stdpath("config") .. "/lua/my/core/theme.lua"}
 }
 
 vim.g.startify_commands = {

@@ -38,13 +38,36 @@ end
 -- Telescope search in the dotfiles directory
 function functions.search_dotfiles()
   require("telescope.builtin").find_files(
-    {prompt_title = "Dotfiles", cwd = "$HOME/dotfiles/"})
+    {prompt_title = "Dotfiles", cwd = "$HOME/.dotfiles/"})
 end
 
 -- Telescope search in the nvim config directory
 function functions.search_nvim_config()
   require("telescope.builtin").find_files(
     {prompt_title = "Neovim Config", cwd = vim.fn.stdpath("config") .. "/"})
+end
+
+function functions.is_windows()
+  if vim.loop.os_uname().sysname == "Windows" then
+    return true
+  end
+  return false
+end
+
+function functions.get_init_filename()
+  return vim.fn.stdpath("config") .. "/init.lua"
+end
+
+function functions.get_plugins_filename()
+  return vim.fn.stdpath("config") .. "/lua/my/plugins/init.lua"
+end
+
+function functions.get_todo_filename()
+  if functions.is_windows() then
+    return "D:/School/Current/deadlines.md"
+  else
+    return "$HOME/Media/DATA/School/Current/deadlines.md"
+  end
 end
 
 return functions

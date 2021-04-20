@@ -44,14 +44,14 @@ lspconfig.clangd.setup {}
 -- cd ~/.local/share/nvim/lua/sumneko_lua
 -- git submodule update --init --recursive
 -- cd 3rd/luamake
--- ninja -f ninja/linux.ninja
+-- compile/install.sh
 -- cd ../..
 -- ./3rd/luamake/luamake rebuild
 
 local luapath = ""
 local luabin = ""
 
-if vim.fn.has("win32") then
+if require("my.core.functions").is_windows() then
   luapath = os.getenv("USERPROFILE") .. "/language_servers/lua-language-server"
   luabin = luapath .. "/bin/Windows/lua-language-server.exe"
 else
