@@ -1,5 +1,5 @@
 local gl = require("galaxyline")
-local colors = require("my.core.colors")
+local colors = require("colors")
 local condition = require("galaxyline.condition")
 local gls = gl.section
 gl.short_line_list = {"NvimTree", "vista", "dbui", "packer", "undotree_2", "startify"}

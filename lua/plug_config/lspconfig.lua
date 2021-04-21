@@ -51,7 +51,7 @@ lspconfig.clangd.setup {}
 local luapath = ""
 local luabin = ""
 
-if require("my.core.functions").is_windows() then
+if vim.loop.os_uname().sysname == "Windows_NT" then
   luapath = os.getenv("USERPROFILE") .. "/language_servers/lua-language-server"
   luabin = luapath .. "/bin/Windows/lua-language-server.exe"
 else

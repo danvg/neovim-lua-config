@@ -8,7 +8,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 return require("packer").startup(function()
-  use "wbthomason/packer.nvim"
+  use {"wbthomason/packer.nvim"}
 
   -- LSP, Autocomplete and snippets
   use {
@@ -37,6 +37,7 @@ return require("packer").startup(function()
 
   -- File manager
   use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
+  use {"ptzz/lf.vim"}
 
   -- Markdown
   use {"iamcco/markdown-preview.nvim", run = {"cd app && yarn install"}}
@@ -51,7 +52,7 @@ return require("packer").startup(function()
   }
 
   -- Terminal
-  use "voldikss/vim-floaterm"
+  use {"voldikss/vim-floaterm"}
 
   -- General plugins
   use {

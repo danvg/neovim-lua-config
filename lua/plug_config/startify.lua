@@ -35,12 +35,17 @@ vim.g.startify_lists = {
   {type = "commands", header = {"   Commands"}}
 }
 
-local funcs = require("my.core.functions")
+local deadlines_path = ""
+if vim.loop.os_uname().sysname == "Windows_NT" then
+  deadlines_path = vim.fn.expand("D:/School/Current/deadlines.md")
+else
+  deadlines_path = vim.fn.expand("~/Media/DATA/School/Current/deadlines.md")
+end
+
 vim.g.startify_bookmarks = {
-  {i = funcs.get_init_filename()},
-  {p = funcs.get_plugins_filename()},
-  {d = funcs.get_todo_filename()},
-  {t = vim.fn.stdpath("config") .. "/lua/my/core/theme.lua"}
+  {i = vim.fn.stdpath("config") .. vim.fn.expand("/init.lua")},
+  {d = deadlines_path},
+  {t = vim.fn.stdpath("config") .. vim.fn.expand("/lua/theme.lua")}
 }
 
 vim.g.startify_commands = {
