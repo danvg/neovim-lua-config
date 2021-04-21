@@ -48,7 +48,7 @@ function functions.search_nvim_config()
 end
 
 function functions.is_windows()
-  if vim.loop.os_uname().sysname == "Windows" then
+  if vim.loop.os_uname().sysname == "Windows_NT" then
     return true
   end
   return false
