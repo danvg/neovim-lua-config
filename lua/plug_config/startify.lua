@@ -48,6 +48,4 @@ vim.g.startify_bookmarks = {
   {t = vim.fn.stdpath("config") .. vim.fn.expand("/lua/theme.lua")}
 }
 
-vim.g.startify_commands = {
-  {u = {"Update Plugins", ":PackerUpdate"} }
-}
+vim.g.startify_commands = {{u = {"Update Plugins", ":PackerUpdate"}}}

@@ -29,6 +29,9 @@ opt("o", "splitright", true)
 opt("o", "completeopt", "menuone,noinsert,noselect")
 opt("o", "hlsearch", false)
 opt("o", "signcolumn", "auto")
+opt("o", "list", true)
+opt("o", "listchars",
+    "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
 
 -- Window
 opt("w", "relativenumber", false)
