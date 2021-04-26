@@ -13,3 +13,4 @@ function telescope_utils.search_nvim_config()
 end
 
 return telescope_utils
+

@@ -1,6 +1,5 @@
 require("gitsigns").setup {
   signs = {
-    -- TODO add hl to colorscheme
     add = {
       hl = "GitSignsAdd",
       text = "▎",
@@ -45,3 +44,4 @@ require("gitsigns").setup {
   status_formatter = nil, -- Use default
   use_decoration_api = false
 }
+

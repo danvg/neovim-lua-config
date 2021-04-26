@@ -1,41 +1,33 @@
 -- Stop lsp diagnostics from showing virtual text
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    update_in_insert = false,
-    underline = true,
-    signs = true
+    virtual_text      = false,
+    update_in_insert  = false,
+    underline         = false,
+    signs             = true
   })
 
 local lspconfig = require("lspconfig")
 
--- npm i -g bash-language-server
-lspconfig.bashls.setup {}
-
 -- npm i -g typescript typescript-language-server
 lspconfig.tsserver.setup {}
+
+-- npm i -g vscode-html-languageserver-bin
+lspconfig.html.setup {}
 
 -- npm i -g vscode-css-languageserver-bin
 lspconfig.cssls.setup {}
 
--- npm i -g pyright
-lspconfig.pyright.setup {}
-
 -- npm i -g vscode-json-languageserver
 lspconfig.jsonls.setup {}
 
--- npm i -g emmet-ls
-require("lspconfig/configs").emmet_ls = {
-  default_config = {
-    cmd = {"emmet-ls", "--stdio"},
-    filetypes = {"html", "css"},
-    root_dir = function() return vim.loop.cwd() end,
-    settings = {}
-  }
-}
-lspconfig.emmet_ls.setup {}
+-- npm i -g pyright
+lspconfig.pyright.setup {}
 
--- pacman -S clang
+-- pip install --user cmake-language-server
+lspconfig.cmake.setup {}
+
+-- pacman -S clang / scoop install llvm
 lspconfig.clangd.setup {}
 
 -- lua  https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
@@ -87,25 +79,3 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
--- no need for hmtl server having emmet-ls and snippets working
--- npm i -g vscode-html-languageserver-bin
--- nvim_lsp.html.setup {}
-
-vim.api.nvim_set_keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gd", ":Telescope lsp_definitions<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gt", ":lua vim.lsp.buf.type_definition()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gr", ":Telescope lsp_references<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gh", ":lua vim.lsp.buf.hover()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<space>rn", ":lua vim.lsp.buf.rename()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<c-p>", ":lua vim.lsp.diagnostic.goto_prev()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<c-n>", ":lua vim.lsp.diagnostic.goto_next()<CR>",
-                        {noremap = true, silent = true})

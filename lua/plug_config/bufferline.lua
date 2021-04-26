@@ -15,14 +15,8 @@ require("bufferline").setup {
     show_close_icon = true,
     show_tab_indicators = true,
     enforce_regular_tabs = true,
-    separator_style = "thick",
+    separator_style = "thin",
     always_show_bufferline = true
   }
 }
 
-vim.api.nvim_set_keymap("n", "<TAB>", ":BufferLineCycleNext<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "gb", ":BufferLinePick<CR>",
-                        {noremap = true, silent = true})

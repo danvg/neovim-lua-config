@@ -43,9 +43,11 @@ else
 end
 
 vim.g.startify_bookmarks = {
-  {i = vim.fn.stdpath("config") .. vim.fn.expand("/init.lua")},
   {d = deadlines_path},
+  {i = vim.fn.stdpath("config") .. vim.fn.expand("/init.lua")},
+  {k = vim.fn.stdpath("config") .. vim.fn.expand("/lua/keymaps.lua")},
   {t = vim.fn.stdpath("config") .. vim.fn.expand("/lua/theme.lua")}
 }
 
 vim.g.startify_commands = {{u = {"Update Plugins", ":PackerUpdate"}}}
+

@@ -75,31 +75,3 @@ require("telescope").setup {
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("media_files")
 
-vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>fg", ":Telescope live_grep<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>fm", ":Telescope media_files<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>fh", ":Telescope help_tags<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>fc", ":Telescope colorscheme<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<CR>",
-                        {noremap = true, silent = true})
-
-vim.api.nvim_set_keymap("n", "<leader>gf", ":Telescope git_files<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gc", ":Telescope git_commits<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gb", ":Telescope git_branches<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gs", ":Telescope git_status<CR>",
-                        {noremap = true, silent = true})
-
-vim.api.nvim_set_keymap("n", "<leader>fa",
-                        ":lua require('plug_config.telescope_utils').search_dotfiles()<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>fn",
-                        ":lua require('plug_config.telescope_utils').search_nvim_config()<CR>",
-                        {noremap = true, silent = true})

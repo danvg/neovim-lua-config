@@ -30,3 +30,4 @@ vim.o.background = "dark"
 
 -- Set colorscheme
 vim.cmd("colorscheme " .. theme_name)
+

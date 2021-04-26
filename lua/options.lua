@@ -1,6 +1,6 @@
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 
-function opt(scope, key, value)
+local function opt(scope, key, value)
   scopes[scope][key] = value
   if scope ~= "o" then scopes["o"][key] = value end
 end
@@ -28,10 +28,9 @@ opt("o", "splitbelow", true)
 opt("o", "splitright", true)
 opt("o", "completeopt", "menuone,noinsert,noselect")
 opt("o", "hlsearch", false)
-opt("o", "signcolumn", "auto")
+opt("o", "signcolumn", "yes")
 opt("o", "list", true)
-opt("o", "listchars",
-    "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
+opt("o", "listchars", "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
 
 -- Window
 opt("w", "relativenumber", false)
@@ -62,3 +61,4 @@ vim.cmd("set shortmess+=c")
 vim.cmd("set iskeyword+=-")
 vim.cmd("set path+=$PWD/**")
 vim.cmd("filetype plugin on")
+

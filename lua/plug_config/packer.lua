@@ -13,7 +13,8 @@ return require("packer").startup(function()
   -- LSP, Autocomplete and snippets
   use {
     "neovim/nvim-lspconfig", "hrsh7th/nvim-compe", "sbdchd/neoformat",
-    "onsails/lspkind-nvim", "hrsh7th/vim-vsnip", "mattn/emmet-vim"
+    "onsails/lspkind-nvim", "glepnir/lspsaga.nvim",
+    "hrsh7th/vim-vsnip", "rafamadriz/friendly-snippets"
   }
 
   -- Telescope
@@ -33,7 +34,7 @@ return require("packer").startup(function()
   }
 
   -- Git
-  use "lewis6991/gitsigns.nvim"
+  use {"lewis6991/gitsigns.nvim"}
 
   -- File manager
   use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
@@ -69,3 +70,4 @@ return require("packer").startup(function()
   -- Start screen
   use {"mhinz/vim-startify"}
 end)
+

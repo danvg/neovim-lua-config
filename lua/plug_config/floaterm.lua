@@ -13,7 +13,3 @@ vim.g.floaterm_wintitle = 0
 vim.g.floaterm_autoclose = 1
 vim.g.floaterm_opener = "edit"
 
-vim.api.nvim_set_keymap("n", "<leader>fk", ":FloatermKill<CR>",
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader>gg", ":FloatermNew lazygit<CR>",
-                        {noremap = true, silent = true})
