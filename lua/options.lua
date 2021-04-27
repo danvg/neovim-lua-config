@@ -7,13 +7,14 @@ end
 
 -- Global
 opt("o", "incsearch", true)
+opt("o", "inccommand", "nosplit")
 opt("o", "ignorecase", true)
 opt("o", "smartcase", true)
 opt("o", "smarttab", true)
 opt("o", "title", true)
 opt("o", "backup", false)
 opt("o", "writebackup", false)
-opt("o", "clipboard", "unnamedplus")
+opt("o", "clipboard", "unnamed,unnamedplus")
 opt("o", "showmode", false)
 opt("o", "showcmd", false)
 opt("o", "pumheight", 15)
@@ -31,15 +32,22 @@ opt("o", "hlsearch", false)
 opt("o", "signcolumn", "yes")
 opt("o", "list", true)
 opt("o", "listchars", "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
+opt("o", "visualbell", false)
+opt("o", "errorbells", false)
+opt("o", "autoread", true)
+opt("o", "autowrite", false)
+opt("o", "confirm", true)
+opt("o", "virtualedit", "block")
 
 -- Window
 opt("w", "relativenumber", false)
 opt("w", "number", true)
-opt("w", "numberwidth", 1)
-opt("w", "wrap", false)
+opt("w", "numberwidth", 4)
 opt("w", "cursorline", true)
 opt("w", "conceallevel", 0)
 opt("w", "spell", false)
+opt("w", "wrap", true)
+opt("w", "linebreak", true)
 
 -- Buffer
 local indent = 2
@@ -53,7 +61,7 @@ opt("b", "swapfile", false)
 opt("b", "undofile", true)
 opt("b", "fileencoding", "utf-8")
 opt("b", "fileformat", "unix")
-opt("b", "spelllang", "en")
+opt("b", "spelllang", "en,sv")
 opt("b", "syntax", "on")
 
 -- Commands
