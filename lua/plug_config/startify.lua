@@ -45,7 +45,7 @@ end
 vim.g.startify_bookmarks = {
   {d = deadlines_path},
   {i = vim.fn.stdpath("config") .. vim.fn.expand("/init.lua")},
-  {k = vim.fn.stdpath("config") .. vim.fn.expand("/lua/keymaps.lua")},
+  {m = vim.fn.stdpath("config") .. vim.fn.expand("/lua/keymaps.lua")},
   {t = vim.fn.stdpath("config") .. vim.fn.expand("/lua/theme.lua")}
 }
 
