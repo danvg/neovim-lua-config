@@ -13,10 +13,6 @@ map("n", "<leader>q",   "<cmd>bd<CR>")
 map("n", "<C-w>",       "<cmd>close<CR>")
 map("i", "jk",          "<ESC>")
 
--- Move selected line / block of text in visual mode
-map("x", "K",           "<cmd>move '<-2<CR>gv-gv")
-map("x", "J",           "<cmd>move '>+1<CR>gv-gv")
-
 -- Better window navigation
 map("n", "<C-h>",       "<C-w>h")
 map("n", "<C-j>",       "<C-w>j")
@@ -29,22 +25,24 @@ map("n", "<S-j>",       "<cmd>resize +4<CR>")
 map("n", "<S-h>",       "<cmd>vertical resize -4<CR>")
 map("n", "<S-l>",       "<cmd>vertical resize +4<CR>")
 
--- Tab key movement
+-- Tab key movement in selection and completion menus
 map("i", "<Tab>",       "v:lua.tab_complete()", {expr = true})
 map("s", "<Tab>",       "v:lua.tab_complete()", {expr = true})
 map("i", "<S-Tab>",     "v:lua.s_tab_complete()", {expr = true})
 map("s", "<S-Tab>",     "v:lua.s_tab_complete()", {expr = true})
+
+-- Move in insert mode
+map("i", "<C-h>",       "<Left>")
+map("i", "<C-j>",       "<Down>")
+map("i", "<C-k>",       "<Up>")
+map("i", "<C-l>",       "<Right>")
 
 -- Keymaps that are plugin dependent
 
 -- Confirm completion
 map("i", "<CR>",        "compe#confirm('<CR>')", {expr = true})
 
--- Lsp saga float window navigation
-map("n", "<C-f>",       "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
-map("n", "<C-b>",       "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
-
--- Goto declaration
+-- Goto definition
 map("n", "gd",          "<cmd>lua vim.lsp.buf.definition()<CR>")
 
 -- Preview definition
@@ -55,7 +53,6 @@ map("n", "gr",          "<cmd>lua require('lspsaga.provider').lsp_finder()<CR>")
 
 -- Code action
 map("n", "<leader>ca",  "<cmd>lua require('lspsaga.codeaction').code_action()<CR>")
-map("n", "<leader>ca",  "<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>")
 
 -- Hover doc
 map("n", "gh",          "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>")
@@ -66,7 +63,7 @@ map("n", "gs",          "<cmd>lua require('lspsaga.signaturehelp').signature_hel
 -- vim.cmd [[ autocmd CursorHoldI * silent! lua require('lspsaga.signaturehelp').signature_help() ]]
 
 -- Rename
-map("n", "<leader>rn",  "<cmd>lua require('lspsaga.rename').signature_help()<CR>")
+map("n", "<leader>rn",  "<cmd>lua require('lspsaga.rename').rename()<CR>")
 
 -- Diagnostics
 map("n", "<leader>cd",  "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<CR>")
@@ -74,7 +71,7 @@ map("n", "<leader>cc",  "<cmd>lua require('lspsaga.diagnostic').show_cursor_diag
 map("n", "[e",          "<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>")
 map("n", "]e",          "<cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>")
 
--- vim.cmd [[ autocmd CursorHold  * lua require('lspsaga.diagnostic').show_line_diagnostics() ]]
+vim.cmd [[ autocmd CursorHold  * lua require('lspsaga.diagnostic').show_line_diagnostics() ]]
 
 -- Open file manager
 map("n", "<leader>e",   "<cmd>Lf<CR>")
