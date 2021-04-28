@@ -37,6 +37,10 @@ map("i", "<C-j>",       "<Down>")
 map("i", "<C-k>",       "<Up>")
 map("i", "<C-l>",       "<Right>")
 
+-- Move selected lines in visual mode
+map("v", "K",           ":move '<-2<CR>gv-gv")
+map("v", "J",           ":move '>+1<CR>gv-gv")
+
 -- Keymaps that are plugin dependent
 
 -- Confirm completion
