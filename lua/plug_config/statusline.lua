@@ -7,11 +7,9 @@ gl.short_line_list = {
   "NvimTree", "vista", "dbui", "packer", "undotree_2", "startify"
 }
 
-colors.line_bg = "#1d2021"
-
 gls.left[1] = {
   RainbowRed = {
-    provider = function() return "▊ " end,
+    provider = function() return " " end,
     highlight = {colors.line_bg, colors.line_bg}
   }
 }
@@ -207,7 +205,7 @@ gls.right[8] = {
 
 gls.right[9] = {
   RainbowBlue = {
-    provider = function() return "▊" end,
+    provider = function() return " " end,
     highlight = {colors.line_bg, colors.line_bg}
   }
 }

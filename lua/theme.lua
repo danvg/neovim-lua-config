@@ -3,7 +3,7 @@ local theme_name = ""
 if vim.loop.os_uname().sysname == "Windows_NT" then
   theme_name = "gruvbox"
 else
-  theme_name = "breezy"
+  theme_name = "nordbuddy"
 end
 
 if theme_name == "gruvbox" then
