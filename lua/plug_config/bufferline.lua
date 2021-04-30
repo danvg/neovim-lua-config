@@ -16,7 +16,7 @@ require("bufferline").setup {
     show_tab_indicators = true,
     enforce_regular_tabs = true,
     separator_style = "thin",
-    always_show_bufferline = true
+    always_show_bufferline = false
   }
 }
 
