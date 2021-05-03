@@ -1,59 +1,63 @@
 local install_path = vim.fn.stdpath("data") ..
                        "/site/pack/packer/start/packer.nvim"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+if not vim.fn.isdirectory(install_path) then
   vim.api.nvim_command(
     "!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
   vim.api.nvim_command("packadd packer.nvim")
 end
 
 return require("packer").startup(function()
-  use {"wbthomason/packer.nvim"}
+  use { "wbthomason/packer.nvim" }
 
   -- LSP, Autocomplete and snippets
   use {
     "neovim/nvim-lspconfig", "hrsh7th/nvim-compe", "sbdchd/neoformat",
-    "onsails/lspkind-nvim", "glepnir/lspsaga.nvim",
-    "hrsh7th/vim-vsnip", "rafamadriz/friendly-snippets"
+    "onsails/lspkind-nvim", "glepnir/lspsaga.nvim", "hrsh7th/vim-vsnip",
+    "rafamadriz/friendly-snippets"
   }
 
   -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
     requires = {
-      {"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"},
-      {"nvim-telescope/telescope-fzy-native.nvim"},
-      {"nvim-telescope/telescope-media-files.nvim"}
+      { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzy-native.nvim" },
+      { "nvim-telescope/telescope-media-files.nvim" }
     }
   }
 
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
-    requires = {"windwp/nvim-ts-autotag", "p00f/nvim-ts-rainbow"}
+    requires = { "windwp/nvim-ts-autotag", "p00f/nvim-ts-rainbow" },
+    run = ":TSUpdate"
   }
 
   -- Git
-  use {"lewis6991/gitsigns.nvim"}
+  use { "lewis6991/gitsigns.nvim" }
 
   -- File manager
-  use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
-  use {"ptzz/lf.vim"}
+  use {
+    "kyazdani42/nvim-tree.lua",
+    requires = { "kyazdani42/nvim-web-devicons" }
+  }
+  use { "ptzz/lf.vim" }
 
   -- Markdown
-  use {"iamcco/markdown-preview.nvim", run = {"cd app && yarn install"}}
+  use { "iamcco/markdown-preview.nvim", run = { "cd app && yarn install" } }
 
   -- Statusline
-  use {"glepnir/galaxyline.nvim"}
+  use { "glepnir/galaxyline.nvim" }
 
   -- Bufferline
   use {
     "akinsho/nvim-bufferline.lua",
-    requires = {"kyazdani42/nvim-web-devicons"}
+    requires = { "kyazdani42/nvim-web-devicons" }
   }
 
   -- Terminal
-  use {"voldikss/vim-floaterm"}
+  use { "voldikss/vim-floaterm" }
 
   -- General plugins
   use {
@@ -63,12 +67,12 @@ return require("packer").startup(function()
 
   -- Themes
   use {
-    {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}, "sainnhe/edge",
+    { "npxbr/gruvbox.nvim", requires = { "rktjmp/lush.nvim" } }, "sainnhe/edge",
     "Th3Whit3Wolf/one-nvim", "Th3Whit3Wolf/space-nvim", "fneu/breezy",
-    {"maaslalani/nordbuddy", requires = {"tjdevries/colorbuddy.nvim"}}
+    { "maaslalani/nordbuddy", requires = { "tjdevries/colorbuddy.nvim" } }
   }
 
   -- Start screen
-  use {"mhinz/vim-startify"}
+  use { "mhinz/vim-startify" }
 end)
 
