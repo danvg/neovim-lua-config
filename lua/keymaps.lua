@@ -10,7 +10,6 @@ vim.g.mapleader = " "
 
 -- Basics
 map("n", "<leader>q",   "<cmd>bd<CR>")
-map("n", "<C-w>",       "<cmd>close<CR>")
 map("i", "jk",          "<ESC>")
 
 -- Better window navigation
