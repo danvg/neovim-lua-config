@@ -74,5 +74,10 @@ return require("packer").startup(function()
 
   -- Start screen
   use { "mhinz/vim-startify" }
+
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    use { "PProvost/vim-ps1.git" }
+  end
+
 end)
 
