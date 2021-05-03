@@ -1,4 +1,4 @@
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
 local function opt(scope, key, value)
   scopes[scope][key] = value
@@ -31,13 +31,16 @@ opt("o", "completeopt", "menuone,noinsert,noselect")
 opt("o", "hlsearch", false)
 opt("o", "signcolumn", "yes")
 opt("o", "list", true)
-opt("o", "listchars", "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
+opt("o", "listchars",
+    "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
 opt("o", "visualbell", false)
 opt("o", "errorbells", false)
 opt("o", "autoread", true)
 opt("o", "autowrite", false)
 opt("o", "confirm", true)
 opt("o", "virtualedit", "block")
+opt("o", "path", "+=.,**")
+opt("o", "iskeyword", "+=-")
 
 -- Window
 opt("w", "relativenumber", false)
@@ -65,8 +68,5 @@ opt("b", "spelllang", "en,sv")
 opt("b", "syntax", "on")
 
 -- Commands
-vim.cmd("set shortmess+=c")
-vim.cmd("set iskeyword+=-")
-vim.cmd("set path+=$PWD/**")
-vim.cmd("filetype plugin on")
+vim.cmd("filetype plugin indent on")
 

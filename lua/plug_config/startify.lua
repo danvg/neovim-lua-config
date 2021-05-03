@@ -29,10 +29,10 @@ vim.g.startify_custom_header = header ]]
 
 vim.g.startify_lists = {
   -- { type = "dir", header = {"   MRU " .. vim.fn.getcwd()} },
-  {type = "bookmarks", header = {"   Bookmarks"}},
-  {type = "files", header = {"   Most recent files"}},
-  {type = "sessions", header = {"   Sessions"}},
-  {type = "commands", header = {"   Commands"}}
+  { type = "bookmarks", header = { "   Bookmarks" } },
+  { type = "files", header = { "   Most recent files" } },
+  { type = "sessions", header = { "   Sessions" } },
+  { type = "commands", header = { "   Commands" } }
 }
 
 local deadlines_path = ""
@@ -43,11 +43,11 @@ else
 end
 
 vim.g.startify_bookmarks = {
-  {d = deadlines_path},
-  {i = vim.fn.stdpath("config") .. vim.fn.expand("/init.lua")},
-  {m = vim.fn.stdpath("config") .. vim.fn.expand("/lua/keymaps.lua")},
-  {t = vim.fn.stdpath("config") .. vim.fn.expand("/lua/theme.lua")}
+  { d = deadlines_path },
+  { i = vim.fn.stdpath("config") .. vim.fn.expand("/init.lua") },
+  { m = vim.fn.stdpath("config") .. vim.fn.expand("/lua/keymaps.lua") },
+  { t = vim.fn.stdpath("config") .. vim.fn.expand("/lua/theme.lua") }
 }
 
-vim.g.startify_commands = {{u = {"Update Plugins", ":PackerUpdate"}}}
+vim.g.startify_commands = { { u = { "Update Plugins", ":PackerUpdate" } } }
 

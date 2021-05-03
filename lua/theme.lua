@@ -14,7 +14,7 @@ end
 
 if theme_name == "edge" then
   -- default, aura, neon
-  vim.g.edge_style = 'default'
+  vim.g.edge_style = "default"
   vim.g.edge_enable_italic = 1
 end
 

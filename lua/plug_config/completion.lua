@@ -36,13 +36,13 @@ require("compe").setup {
   max_menu_width = 100,
   documentation = true,
   source = {
-    path = {kind = "  "},
-    buffer = {kind = "  "},
-    calc = {kind = "   "},
-    vsnip = {kind = " ﬌ "},
-    nvim_lsp = {kind = "  "},
-    nvim_lua = {kind = "  "},
-    spell = {kind = "  "},
+    path = { kind = "  " },
+    buffer = { kind = "  " },
+    calc = { kind = "   " },
+    vsnip = { kind = " ﬌ " },
+    nvim_lsp = { kind = "  " },
+    nvim_lua = { kind = "  " },
+    spell = { kind = "  " },
     tags = false,
     treesitter = false,
     emoji = false
@@ -95,7 +95,7 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
+  elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
     return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
@@ -107,7 +107,7 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+  elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
     return t "<Plug>(vsnip-jump-prev)"
   else
     return t "<S-Tab>"

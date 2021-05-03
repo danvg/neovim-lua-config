@@ -1,27 +1,27 @@
 -- Stop lsp diagnostics from showing virtual text
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text      = false,
-    update_in_insert  = false,
-    underline         = false,
-    signs             = true
+    virtual_text = false,
+    update_in_insert = false,
+    underline = false,
+    signs = true
   })
 
 local lspconfig = require("lspconfig")
 
--- npm i -g typescript typescript-language-server
+-- npm i -u typescript typescript-language-server
 lspconfig.tsserver.setup {}
 
--- npm i -g vscode-html-languageserver-bin
+-- npm i -u vscode-html-languageserver-bin
 lspconfig.html.setup {}
 
--- npm i -g vscode-css-languageserver-bin
+-- npm i -u vscode-css-languageserver-bin
 lspconfig.cssls.setup {}
 
--- npm i -g vscode-json-languageserver
+-- npm i -u vscode-json-languageserver
 lspconfig.jsonls.setup {}
 
--- npm i -g pyright
+-- npm i -u pyright
 lspconfig.pyright.setup {}
 
 -- pip install --user cmake-language-server
@@ -30,52 +30,88 @@ lspconfig.cmake.setup {}
 -- pacman -S clang / scoop install llvm
 lspconfig.clangd.setup {}
 
--- lua  https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
--- install instructions:
--- git clone https://github.com/sumneko/lua-language-server $HOME/.local/share/nvim/lua/sumneko_lua
--- cd ~/.local/share/nvim/lua/sumneko_lua
+-- npm i -u vim-language-server
+lspconfig.vimls.setup {}
+
+------------------------------------------------------------------------------
+-- Manually installed
+------------------------------------------------------------------------------
+
+local ls_install_root = vim.fn.stdpath("data") .. "/language_servers"
+
+-- install instructions (Linux):
+-- git clone https://github.com/sumneko/lua-language-server ~/.local/share/nvim/language_servers/sumneko_lua
+-- cd ~/.local/share/nvim/language_servers/sumneko_lua
 -- git submodule update --init --recursive
 -- cd 3rd/luamake
 -- compile/install.sh
 -- cd ../..
 -- ./3rd/luamake/luamake rebuild
 
-local luapath = ""
-local luabin = ""
+if vim.fn.isdirectory(ls_install_root .. "/sumneko_lua") then
 
-if vim.loop.os_uname().sysname == "Windows_NT" then
-  luapath = os.getenv("USERPROFILE") .. "/language_servers/lua-language-server"
-  luabin = luapath .. "/bin/Windows/lua-language-server.exe"
-else
-  luapath = "/home/" .. os.getenv("USER") ..
-              "/.local/share/nvim/lua/sumneko_lua"
-  luabin = luapath .. "/bin/Linux/lua-language-server"
-end
+  local luaos = ""
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    luaos = "Windows"
+  else
+    luaos = "Linux"
+  end
 
-lspconfig.sumneko_lua.setup {
-  cmd = {luabin, "-E", luapath .. "/main.lua"},
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = vim.split(package.path, ";")
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {"vim", "use"}
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+  local luapath = ls_install_root .. "/sumneko_lua"
+  local luabin = luapath .. "/bin/" .. luaos .. "/lua-language-server"
+
+  lspconfig.sumneko_lua.setup {
+    cmd = { luabin, "-E", luapath .. "/main.lua" },
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua
+          -- you're using (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          -- Setup your lua path
+          path = vim.split(package.path, ";")
         },
-        maxPreload = 10000
-      },
-      telemetry = {enable = false}
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { "vim", "use" }
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+          },
+          maxPreload = 10000
+        },
+        telemetry = { enable = false }
+      }
     }
   }
-}
+
+end
+
+-- ada language server, at the moment the only way to get
+-- it is to compile it (very hard) or take it from the
+-- vscode plugin, only the executable ada_language_server
+-- is needed
+if vim.fn.isdirectory(ls_install_root .. "/als") then
+
+  lspconfig.als.setup {
+    cmd = { ls_install_root .. "/als/ada_language_server" },
+    settings = {
+      ada = {
+        projectFile = "build.gpr",
+        scenarioVariables = {
+          Mode = "debug",
+          Windowing_System = "windows",
+          GLFW_Version = "3"
+        },
+        enableDiagnostics = true,
+        defaultCharset = "utf-8",
+        renameInComments = true
+      }
+    }
+  }
+
+end
 

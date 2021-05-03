@@ -15,11 +15,13 @@ require("telescope").setup {
     sorting_strategy = "ascending",
     layout_strategy = "horizontal",
     layout_defaults = {
-      horizontal = {mirror = false},
-      vertical = {mirror = false}
+      horizontal = { mirror = false },
+      vertical = { mirror = false }
     },
     file_sorter = require("telescope.sorters").get_fzy_sorter,
-    file_ignore_patterns = {".git", "node_modules", "NTUSER*", "ntuser*", "desktop.ini"},
+    file_ignore_patterns = {
+      ".git", "node_modules", "NTUSER*", "ntuser*", "desktop.ini"
+    },
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
@@ -28,10 +30,10 @@ require("telescope").setup {
     results_height = 1,
     results_width = 0.8,
     border = {},
-    borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     color_devicons = true,
     use_less = true,
-    set_env = {["COLORTERM"] = "truecolor"}, -- default = nil,
+    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
@@ -62,11 +64,11 @@ require("telescope").setup {
     }
   },
   extensions = {
-    fzy_native = {override_generic_sorter = false, override_file_sorter = true},
+    fzy_native = { override_generic_sorter = false, override_file_sorter = true },
     media_files = {
       -- filetypes whitelist
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = {"png", "webp", "jpg", "jpeg"},
+      filetypes = { "png", "webp", "jpg", "jpeg" },
       find_cmd = "rg" -- find command (defaults to `fd`)
     }
   }
