@@ -1,10 +1,5 @@
 -- edge, gruvbox, one-nvim, space-nvim, breezy ...
-local theme_name = ""
-if vim.loop.os_uname().sysname == "Windows_NT" then
-  theme_name = "gruvbox"
-else
-  theme_name = "nordbuddy"
-end
+local theme_name = "nordbuddy"
 
 if theme_name == "gruvbox" then
   -- soft, medium, hard
