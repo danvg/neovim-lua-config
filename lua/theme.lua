@@ -14,11 +14,20 @@ if theme_name == "edge" then
 end
 
 if theme_name == "breezy" then
-  vim.cmd([[
-      au FileType * hi Normal       guibg=NONE
-      au FileType * hi LineNr       guibg=NONE
-      au FileType * hi SignColumn   guibg=NONE
-  ]])
+  vim.api.nvim_exec([[
+    augroup UserHighlights
+      autocmd!
+      autocmd ColorScheme * hi Normal             ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi LineNr             ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi SignColumn         ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi GitSignsAdd        ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi GitSignsAddNr      ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi GitSignsDelete     ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi GitSignsDeleteNr   ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi GitSignsChange     ctermbg=NONE  guibg=NONE
+      autocmd ColorScheme * hi GitSignsChangeNr   ctermbg=NONE  guibg=NONE
+    augroup end
+  ]], false)
 end
 
 vim.o.background = "dark"
