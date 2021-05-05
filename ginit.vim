@@ -1,6 +1,6 @@
 set lines=48 columns=120 linespace=0
 
-:GuiFont! JetBrainsMono NF:h12
+:GuiFont! FantasqueSansMono NF:h14
 :GuiPopupmenu 0
 :GuiTabline 0
 :GuiLinespace 1
