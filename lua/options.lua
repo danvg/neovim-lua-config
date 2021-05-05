@@ -41,6 +41,7 @@ opt("o", "confirm", true)
 opt("o", "virtualedit", "block")
 opt("o", "path", "+=.,**")
 opt("o", "iskeyword", "+=-")
+opt("o", "title", true)
 
 -- Window
 opt("w", "relativenumber", false)
