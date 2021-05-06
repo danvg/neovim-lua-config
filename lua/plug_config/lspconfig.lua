@@ -50,15 +50,30 @@ local ls_install_root = vim.fn.stdpath("data") .. "/language_servers"
 
 if vim.fn.isdirectory(ls_install_root .. "/sumneko_lua") then
 
-  local luaos = ""
-  if vim.loop.os_uname().sysname == "Windows_NT" then
+  local luaos = vim.loop.os_uname().sysname
+  if luaos == "Windows_NT" then
     luaos = "Windows"
-  else
-    luaos = "Linux"
   end
 
   local luapath = ls_install_root .. "/sumneko_lua"
   local luabin = luapath .. "/bin/" .. luaos .. "/lua-language-server"
+
+  local diagnostic_globals = { "vim", "use" }
+
+  local workspace_libraries = {
+      [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+      [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+  }
+
+  if vim.fn.filereadable("/usr/share/xsessions/awesome.desktop") then
+    -- awesome wm globals
+    table.insert(diagnostic_globals, "awesome")
+    table.insert(diagnostic_globals, "client")
+    table.insert(diagnostic_globals, "root")
+    table.insert(diagnostic_globals, "screen")
+    -- awesome wm libs
+    workspace_libraries["/usr/share/awesome/lib"] = true
+  end
 
   lspconfig.sumneko_lua.setup {
     cmd = { luabin, "-E", luapath .. "/main.lua" },
@@ -73,14 +88,11 @@ if vim.fn.isdirectory(ls_install_root .. "/sumneko_lua") then
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { "vim", "use" }
+          globals = diagnostic_globals
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-          },
+          library = workspace_libraries,
           maxPreload = 10000
         },
         telemetry = { enable = false }
