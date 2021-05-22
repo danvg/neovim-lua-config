@@ -31,7 +31,7 @@ opt("o", "splitright", true)
 opt("o", "completeopt", "menuone,noinsert,noselect")
 opt("o", "hlsearch", false)
 opt("o", "signcolumn", "yes")
-opt("o", "list", true)
+opt("o", "list", false)
 opt("o", "listchars",
     "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
 opt("o", "visualbell", false)
@@ -51,7 +51,7 @@ opt("w", "numberwidth", 4)
 opt("w", "cursorline", true)
 opt("w", "conceallevel", 0)
 opt("w", "spell", false)
-opt("w", "wrap", true)
+opt("w", "wrap", false)
 opt("w", "linebreak", true)
 
 -- Buffer

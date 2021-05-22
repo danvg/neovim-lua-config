@@ -15,6 +15,10 @@ lspconfig.tsserver.setup {}
 -- npm i -u vscode-html-languageserver-bin
 lspconfig.html.setup {}
 
+-- npm i -u typescript
+-- npm i -u @angular/language-service
+lspconfig.angularls.setup {}
+
 -- npm i -u vscode-css-languageserver-bin
 lspconfig.cssls.setup {}
 

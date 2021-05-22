@@ -14,7 +14,7 @@ return require("packer").startup(function()
   use {
     "neovim/nvim-lspconfig", "hrsh7th/nvim-compe", "sbdchd/neoformat",
     "onsails/lspkind-nvim", "glepnir/lspsaga.nvim", "hrsh7th/vim-vsnip",
-    "rafamadriz/friendly-snippets"
+    "rafamadriz/friendly-snippets", "mattn/emmet-vim"
   }
 
   -- Telescope
