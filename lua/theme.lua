@@ -30,7 +30,7 @@ if theme_name == "breezy" then
   ]], false)
 end
 
-vim.o.background = "dark"
+vim.opt.background = "dark"
 
 -- Set colorscheme
 vim.cmd("colorscheme " .. theme_name)

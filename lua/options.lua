@@ -1,73 +1,65 @@
-local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
-
-local function opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= "o" then scopes["o"][key] = value end
-end
-
 -- Global
-opt("o", "incsearch", true)
-opt("o", "inccommand", "nosplit")
-opt("o", "ignorecase", true)
-opt("o", "smartcase", true)
-opt("o", "smarttab", true)
-opt("o", "title", true)
-opt("o", "titlestring", "Nvim - %t")
-opt("o", "backup", false)
-opt("o", "writebackup", false)
-opt("o", "clipboard", "unnamed,unnamedplus")
-opt("o", "showmode", false)
-opt("o", "showcmd", false)
-opt("o", "pumheight", 15)
-opt("o", "showtabline", 2)
-opt("o", "updatetime", 100)
-opt("o", "scrolloff", 10)
-opt("o", "cmdheight", 1)
-opt("o", "termguicolors", true)
-opt("o", "mouse", "a")
-opt("o", "hidden", true)
-opt("o", "splitbelow", true)
-opt("o", "splitright", true)
-opt("o", "completeopt", "menuone,noinsert,noselect")
-opt("o", "hlsearch", false)
-opt("o", "signcolumn", "yes")
-opt("o", "list", false)
-opt("o", "listchars",
-    "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣")
-opt("o", "visualbell", false)
-opt("o", "errorbells", false)
-opt("o", "autoread", true)
-opt("o", "autowrite", false)
-opt("o", "confirm", true)
-opt("o", "virtualedit", "block")
-opt("o", "path", "+=.,**")
-opt("o", "iskeyword", "+=-")
-opt("o", "title", true)
+vim.opt.incsearch = true;
+vim.opt.ignorecase = true;
+vim.opt.ignorecase = true;
+vim.opt.smartcase = true;
+vim.opt.smarttab = true;
+vim.opt.title = true;
+vim.opt.titlestring = "Nvim - %t";
+vim.opt.backup = false;
+vim.opt.writebackup = false;
+vim.opt.clipboard:prepend("unnamed,unnamedplus");
+vim.opt.showmode = false;
+vim.opt.showcmd = false;
+vim.opt.pumheight = 15;
+vim.opt.showtabline = 2;
+vim.opt.updatetime = 100;
+vim.opt.scrolloff = 10;
+vim.opt.cmdheight = 1;
+vim.opt.termguicolors = true;
+vim.opt.mouse = "a";
+vim.opt.hidden = true;
+vim.opt.splitbelow = true;
+vim.opt.splitright = true;
+vim.opt.completeopt = "menuone,noinsert,noselect";
+vim.opt.hlsearch = false;
+vim.opt.signcolumn = "yes";
+vim.opt.list = false;
+vim.opt.listchars = "tab:▸ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣";
+vim.opt.visualbell = false;
+vim.opt.errorbells = false;
+vim.opt.autoread = true;
+vim.opt.autowrite = false;
+vim.opt.confirm = true;
+vim.opt.virtualedit = "block";
+vim.opt.path:append(".,**");
+vim.opt.iskeyword:append("-");
+vim.opt.title = true;
 
 -- Window
-opt("w", "relativenumber", false)
-opt("w", "number", true)
-opt("w", "numberwidth", 4)
-opt("w", "cursorline", true)
-opt("w", "conceallevel", 0)
-opt("w", "spell", false)
-opt("w", "wrap", false)
-opt("w", "linebreak", true)
+vim.opt.relativenumber = false;
+vim.opt.number = true;
+vim.opt.numberwidth = 4;
+vim.opt.cursorline = true;
+vim.opt.conceallevel = 0;
+vim.opt.spell = false;
+vim.opt.wrap = false;
+vim.opt.linebreak = true;
 
 -- Buffer
 local indent = 2
-opt("b", "tabstop", indent)
-opt("b", "softtabstop", indent)
-opt("b", "shiftwidth", indent)
-opt("b", "expandtab", true)
-opt("b", "autoindent", true)
-opt("b", "smartindent", true)
-opt("b", "swapfile", false)
-opt("b", "undofile", true)
-opt("b", "fileencoding", "utf-8")
-opt("b", "fileformat", "unix")
-opt("b", "spelllang", "en,sv")
-opt("b", "syntax", "on")
+vim.opt.tabstop = indent;
+vim.opt.softtabstop = indent;
+vim.opt.shiftwidth = indent;
+vim.opt.expandtab = true;
+vim.opt.autoindent = true;
+vim.opt.smartindent = true;
+vim.opt.swapfile = false;
+vim.opt.undofile = true;
+vim.opt.fileencoding = "utf-8";
+vim.opt.fileformat = "unix";
+vim.opt.spelllang = "en,sv";
+vim.opt.syntax = "on";
 
 -- Commands
 vim.cmd("filetype plugin indent on")
