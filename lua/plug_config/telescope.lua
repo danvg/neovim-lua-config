@@ -3,9 +3,14 @@ local actions = require("telescope.actions")
 require("telescope").setup {
   defaults = {
     vimgrep_arguments = {
-      "rg", "--no-heading", "--with-filename", "--line-number", "--column",
+      "rg",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
       "--smart-case"
     },
+    prompt_prefix = " ",
     selection_caret = " ",
     entry_prefix = "  ",
     initial_mode = "insert",
@@ -15,22 +20,18 @@ require("telescope").setup {
     layout_config = {
       horizontal = { mirror = false },
       vertical = { mirror = false },
-      width = 0.75,
-      prompt_position = "top",
-      prompt_prefix = " ",
-      preview_cutoff = 120,
     },
-    file_sorter = require("telescope.sorters").get_fzy_sorter,
+    file_sorter = require("telescope.sorters").get_fzy_file,
     file_ignore_patterns = {
       ".git", "node_modules", "NTUSER*", "ntuser*", "desktop.ini"
     },
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-    shorten_path = true,
     winblend = 0,
     border = {},
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
     color_devicons = true,
     use_less = true,
+    path_display = {},
     set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
