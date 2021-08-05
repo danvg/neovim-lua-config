@@ -82,7 +82,7 @@ map("n", "]e",
 vim.cmd [[ autocmd CursorHold  * lua require('lspsaga.diagnostic').show_line_diagnostics() ]]
 
 -- Open file manager
-map("n", "<leader>e", "<cmd>Lf<CR>")
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
 
 -- Searching with Telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
