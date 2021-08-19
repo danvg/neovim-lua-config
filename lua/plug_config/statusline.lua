@@ -49,6 +49,18 @@ gls.left[2] = {
 }
 
 gls.left[3] = {
+  current_dir = {
+    provider = function()
+      local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+      return "  " .. dir_name
+    end,
+    highlight = { colors.yellow, colors.line_bg },
+    separator = " ",
+    separator_highlight = { colors.line_bg, colors.line_bg },
+  },
+}
+
+gls.left[4] = {
   FileSize = {
     provider = "FileSize",
     condition = condition.buffer_not_empty,
@@ -56,7 +68,7 @@ gls.left[3] = {
   }
 }
 
-gls.left[4] = {
+gls.left[5] = {
   FileIcon = {
     provider = "FileIcon",
     condition = condition.buffer_not_empty,
@@ -67,7 +79,7 @@ gls.left[4] = {
   }
 }
 
-gls.left[5] = {
+gls.left[6] = {
   FileName = {
     provider = "FileName",
     condition = condition.buffer_not_empty,
@@ -75,7 +87,7 @@ gls.left[5] = {
   }
 }
 
-gls.left[6] = {
+gls.left[7] = {
   LineInfo = {
     provider = "LineColumn",
     separator = " ",
@@ -84,7 +96,7 @@ gls.left[6] = {
   }
 }
 
-gls.left[7] = {
+gls.left[8] = {
   PerCent = {
     provider = "LinePercent",
     separator = " ",
@@ -93,7 +105,7 @@ gls.left[7] = {
   }
 }
 
-gls.left[8] = {
+gls.left[9] = {
   DiagnosticError = {
     provider = "DiagnosticError",
     icon = "  ",
@@ -101,7 +113,7 @@ gls.left[8] = {
   }
 }
 
-gls.left[9] = {
+gls.left[10] = {
   DiagnosticWarn = {
     provider = "DiagnosticWarn",
     icon = "  ",
@@ -109,7 +121,7 @@ gls.left[9] = {
   }
 }
 
-gls.left[10] = {
+gls.left[11] = {
   DiagnosticHint = {
     provider = "DiagnosticHint",
     icon = "  ",
@@ -117,7 +129,7 @@ gls.left[10] = {
   }
 }
 
-gls.left[11] = {
+gls.left[12] = {
   DiagnosticInfo = {
     provider = "DiagnosticInfo",
     icon = "  ",
@@ -133,7 +145,7 @@ gls.right[1] = {
       if tbl[vim.bo.filetype] then return false end
       return true
     end,
-    icon = " LSP:",
+    icon = "  LSP:",
     highlight = { colors.cyan, colors.line_bg, "bold" }
   }
 }
