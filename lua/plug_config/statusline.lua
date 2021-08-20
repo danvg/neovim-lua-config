@@ -3,6 +3,7 @@ local section = galaxyline.section
 local colors = require("colors")
 local condition = require("galaxyline.condition")
 
+
 galaxyline.short_line_list = {
   "NvimTree", "vista", "dbui", "packer", "undotree_2", "startify"
 }
@@ -61,6 +62,7 @@ left({
       return "  " .. dir_name .. " "
     end,
     highlight = { colors.yellow, colors.bg3 }
+
   }
 })
 
@@ -81,6 +83,10 @@ left({
     highlight = { colors.magenta, colors.bg3, "bold" }
   }
 })
+
+
+
+
 
 left({
   DiagnosticError = {
@@ -232,4 +238,3 @@ sleft({
 sright({
   BufferIcon = { provider = "BufferIcon", highlight = { colors.fg, colors.bg3 } }
 })
-
