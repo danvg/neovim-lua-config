@@ -1,8 +1,9 @@
 -- This colors are used any plugin where colors
 -- are configured sush as GalaxyLine etc.
-
 local default_colors = {
   bg = "#202328",
+  bg2 = "#353b45",
+  bg3 = "#30243c",
   fg = "#bbc2cf",
   yellow = "#ECBE7B",
   cyan = "#008080",
@@ -12,12 +13,13 @@ local default_colors = {
   violet = "#a9a1e1",
   magenta = "#c678dd",
   blue = "#51afef",
-  red = "#ec5f67",
-  line_bg = "#202328"
+  red = "#ec5f67"
 }
 
 local gruvbox_dark_colors = {
   bg = "#282828",
+  bg2 = "#3b3e3f",
+  bg3 = "#313435",
   fg = "#ebdbb2",
   yellow = "#d79921",
   cyan = "#458588",
@@ -27,12 +29,13 @@ local gruvbox_dark_colors = {
   violet = "#458588",
   magenta = "#b16286",
   blue = "#458588",
-  red = "#cc241d",
-  line_bg = "#282828"
+  red = "#cc241d"
 }
 
 local one_half_dark_colors = {
   bg = "#282c34",
+  bg2 = "#353b45",
+  bg3 = "#30343c",
   fg = "#dcdfe4",
   yellow = "#e5c07b",
   cyan = "#56b6c2",
@@ -42,12 +45,13 @@ local one_half_dark_colors = {
   violet = "#61afef",
   magenta = "#c678dd",
   blue = "#61afef",
-  red = "#e06c75",
-  line_bg = "#282c34"
+  red = "#e06c75"
 }
 
 local nord_dark_colors = {
   bg = "#2E3440",
+  bg2 = "#464c58",
+  bg3 = "#494f5b",
   fg = "#d8dee9",
   yellow = "#ebcb8b",
   cyan = "#88c0d0",
@@ -57,8 +61,7 @@ local nord_dark_colors = {
   violet = "#5e81ac",
   magenta = "#b48ead",
   blue = "#81a1c1",
-  red = "#bf616a",
-  line_bg = "#2E3440"
+  red = "#bf616a"
 }
 
 local colorscheme_name = vim.api.nvim_exec(":colorscheme", true)

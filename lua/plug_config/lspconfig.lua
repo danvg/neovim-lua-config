@@ -55,9 +55,7 @@ local ls_install_root = vim.fn.stdpath("data") .. "/language_servers"
 if vim.fn.isdirectory(ls_install_root .. "/sumneko_lua") then
 
   local luaos = vim.loop.os_uname().sysname
-  if luaos == "Windows_NT" then
-    luaos = "Windows"
-  end
+  if luaos == "Windows_NT" then luaos = "Windows" end
 
   local luapath = ls_install_root .. "/sumneko_lua"
   local luabin = luapath .. "/bin/" .. luaos .. "/lua-language-server"
@@ -65,8 +63,8 @@ if vim.fn.isdirectory(ls_install_root .. "/sumneko_lua") then
   local diagnostic_globals = { "vim", "use" }
 
   local workspace_libraries = {
-      [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-      [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
   }
 
   if vim.fn.filereadable("/usr/share/xsessions/awesome.desktop") then
@@ -116,12 +114,8 @@ if vim.fn.isdirectory(ls_install_root .. "/als") then
     cmd = { ls_install_root .. "/als/ada_language_server" },
     settings = {
       ada = {
-        projectFile = "build.gpr",
-        scenarioVariables = {
-          Mode = "debug",
-          Windowing_System = "windows",
-          GLFW_Version = "3"
-        },
+        projectFile = "project.gpr",
+        scenarioVariables = {},
         enableDiagnostics = true,
         defaultCharset = "utf-8",
         renameInComments = true
