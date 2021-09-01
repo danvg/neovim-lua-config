@@ -1,5 +1,5 @@
 -- edge, gruvbox, one-nvim, space-nvim, breezy ...
-local theme_name = "nordbuddy"
+local theme_name = "gruvbox"
 
 if theme_name == "gruvbox" then
   -- soft, medium, hard

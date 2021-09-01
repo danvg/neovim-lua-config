@@ -1,8 +1,6 @@
 require("bufferline").setup {
   options = {
     view = "multiwindow",
-    numbers = "none", -- buffer_id
-    number_style = "superscript",
     buffer_close_icon = "",
     modified_icon = "●",
     close_icon = "",

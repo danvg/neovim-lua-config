@@ -114,7 +114,7 @@ if vim.fn.isdirectory(ls_install_root .. "/als") then
     cmd = { ls_install_root .. "/als/ada_language_server" },
     settings = {
       ada = {
-        projectFile = "project.gpr",
+        projectFile = "build.gpr",
         scenarioVariables = {},
         enableDiagnostics = true,
         defaultCharset = "utf-8",
