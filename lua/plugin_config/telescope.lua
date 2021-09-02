@@ -3,11 +3,7 @@ local actions = require("telescope.actions")
 require("telescope").setup {
   defaults = {
     vimgrep_arguments = {
-      "rg",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
+      "rg", "--no-heading", "--with-filename", "--line-number", "--column",
       "--smart-case"
     },
     prompt_prefix = " ",
@@ -19,7 +15,7 @@ require("telescope").setup {
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = { mirror = false },
-      vertical = { mirror = false },
+      vertical = { mirror = false }
     },
     file_sorter = require("telescope.sorters").get_fzy_file,
     file_ignore_patterns = {
@@ -28,7 +24,7 @@ require("telescope").setup {
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     winblend = 0,
     border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     color_devicons = true,
     use_less = true,
     path_display = {},
@@ -67,7 +63,7 @@ require("telescope").setup {
     media_files = {
       -- filetypes whitelist
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = { "png", "webp", "jpg", "jpeg" },
+      filetypes = { "png", "webp", "jpg", "jpeg" }
     }
   }
 }

@@ -3,7 +3,6 @@ local section = galaxyline.section
 local colors = require("colors")
 local condition = require("galaxyline.condition")
 
-
 galaxyline.short_line_list = {
   "NvimTree", "vista", "dbui", "packer", "undotree_2", "startify"
 }
@@ -83,10 +82,6 @@ left({
     highlight = { colors.magenta, colors.bg3, "bold" }
   }
 })
-
-
-
-
 
 left({
   DiagnosticError = {

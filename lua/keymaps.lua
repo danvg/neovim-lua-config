@@ -95,9 +95,9 @@ map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>")
 map("n", "<leader>gb", "<cmd>Telescope git_branches<CR>")
 map("n", "<leader>gs", "<cmd>Telescope git_status<CR>")
 map("n", "<leader>fa",
-    "<cmd>lua require('plug_config.telescope_utils').search_dotfiles()<CR>")
+    "<cmd>lua require('plugin_config.telescope_utils').search_dotfiles()<CR>")
 map("n", "<leader>fn",
-    "<cmd>lua require('plug_config.telescope_utils').search_nvim_config()<CR>")
+    "<cmd>lua require('plugin_config.telescope_utils').search_nvim_config()<CR>")
 
 -- Tabline
 map("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>")

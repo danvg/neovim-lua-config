@@ -32,22 +32,6 @@ local gruvbox_dark_colors = {
   red = "#cc241d"
 }
 
-local one_half_dark_colors = {
-  bg = "#282c34",
-  bg2 = "#353b45",
-  bg3 = "#30343c",
-  fg = "#dcdfe4",
-  yellow = "#e5c07b",
-  cyan = "#56b6c2",
-  darkblue = "#61afef",
-  green = "#98c379",
-  orange = "#e5c07b",
-  violet = "#61afef",
-  magenta = "#c678dd",
-  blue = "#61afef",
-  red = "#e06c75"
-}
-
 local nord_dark_colors = {
   bg = "#2E3440",
   bg2 = "#464c58",
@@ -67,8 +51,6 @@ local nord_dark_colors = {
 local colorscheme_name = vim.api.nvim_exec(":colorscheme", true)
 if colorscheme_name == "gruvbox" then
   return gruvbox_dark_colors
-elseif colorscheme_name == "one-nvim" then
-  return one_half_dark_colors
 elseif colorscheme_name == "nordbuddy" then
   return nord_dark_colors
 else
