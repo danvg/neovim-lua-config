@@ -16,6 +16,18 @@ vim.api.nvim_exec([[
 require("packer").startup(function()
   use { "wbthomason/packer.nvim" }
 
+  -- Theming
+
+  use {
+    "npxbr/gruvbox.nvim",
+    requires = { "rktjmp/lush.nvim" },
+    config = function()
+      vim.g.gruvbox_contrast_dark = "medium"
+      vim.opt.background = "dark"
+      vim.api.nvim_exec("colorscheme gruvbox", false)
+    end
+  }
+
   -- LSP, Autocomplete and snippets
 
   use {
@@ -110,6 +122,7 @@ require("packer").startup(function()
 
   use {
     "mhinz/vim-startify",
+    opt = true,
     config = function() require("plugin_config.startify") end
   }
 
@@ -133,18 +146,6 @@ require("packer").startup(function()
   use {
     "RRethy/vim-illuminate",
     config = function() require("plugin_config.illuminate") end
-  }
-
-  -- Theming
-
-  use {
-    "npxbr/gruvbox.nvim",
-    requires = { "rktjmp/lush.nvim" },
-    config = function()
-      vim.g.gruvbox_contrast_dark = "medium"
-      vim.opt.background = "dark"
-      vim.api.nvim_exec("colorscheme gruvbox", false)
-    end
   }
 
 end)
