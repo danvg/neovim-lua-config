@@ -1,6 +1,6 @@
 local actions = require("telescope.actions")
 
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     vimgrep_arguments = {
       "rg", "--no-heading", "--with-filename", "--line-number", "--column",
@@ -66,8 +66,20 @@ require("telescope").setup {
       filetypes = { "png", "webp", "jpg", "jpeg" }
     }
   }
-}
+})
 
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("media_files")
 
+local set_keymap = require("utils").set_keymap
+set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
+set_keymap("n", "<leader>fn",
+           ":lua require('telescope.builtin').find_files{cwd=vim.fn.stdpath('config')}<CR>")
+set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
+set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>")
+set_keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<CR>")
+set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
+set_keymap("n", "<leader>gf", "<cmd>Telescope git_files<CR>")
+set_keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>")
+set_keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>")
+set_keymap("n", "<leader>gs", "<cmd>Telescope git_status<CR>")
