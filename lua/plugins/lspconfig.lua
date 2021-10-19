@@ -1,6 +1,8 @@
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local custom_on_attach = function(_, bufnr)
+  require("lsp_signature").on_attach()
+
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
@@ -79,7 +81,7 @@ vim.fn.sign_define("LspDiagnosticsSignWarning",
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = { prefix = "", spacing = 0 },
+    virtual_text = false, -- { prefix = "", spacing = 0 },
     signs = true,
     underline = true,
     update_in_insert = false -- update diagnostics insert mode
@@ -97,4 +99,6 @@ vim.api.nvim_exec([[
   :command! LspSwitchSourceHeader :lua require("plugins.lsp_ext").switch_source_header()<CR>
   :command! LspPeekDeclaration :lua require("plugins.lsp_ext").peek_declaration()<CR>
   :command! LspPeekDefinition :lua require("plugins.lsp_ext").peek_definition()<CR>
+
+  autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 ]], false)

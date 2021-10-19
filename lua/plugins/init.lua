@@ -40,54 +40,47 @@ require("packer").startup(function()
   })
   --]]
 
-  use({
-    "Mofiqul/vscode.nvim",
-    config = function()
-      require("plugins.vscode")
-    end
-  })
+  use(
+    { "Mofiqul/vscode.nvim", config = function() require("plugins.vscode") end })
 
   -- LSP, autocomplete, snippets, formatting
 
   use({
     "L3MON4D3/LuaSnip",
     requires = { "rafamadriz/friendly-snippets" },
-    config = function()
-      require("plugins.luasnip")
-    end
+    config = function() require("plugins.luasnip") end
   })
 
   use({
     "hrsh7th/nvim-cmp",
-    requires = { "onsails/lspkind-nvim" },
+    requires = {
+      "onsails/lspkind-nvim", "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path"
+    },
     after = "LuaSnip",
-    config = function()
-      require("plugins.cmp")
-    end
+    config = function() require("plugins.cmp") end
   })
 
-  use({ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" })
-  use({ "hrsh7th/cmp-nvim-lua", after = "cmp_luasnip" })
-  use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
-  use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
-  use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+  use({
+    "ray-x/lsp_signature.nvim",
+    after = "nvim-cmp",
+    config = function()
+      require("lsp_signature").setup({ hint_enable = false })
+    end
+  })
 
   use({
     "neovim/nvim-lspconfig",
-    after = "cmp-nvim-lsp",
-    config = function()
-      require("plugins.lspconfig")
-    end
+    requires = { "williamboman/nvim-lsp-installer" },
+    after = "nvim-cmp",
+    config = function() require("plugins.lspconfig") end
   })
-
-  use({ "williamboman/nvim-lsp-installer" })
 
   use({
     "mhartington/formatter.nvim",
     cmd = "Format",
-    config = function()
-      require("plugins.formatter")
-    end
+    config = function() require("plugins.formatter") end
   })
 
   -- Find, filter and explore
@@ -99,9 +92,7 @@ require("packer").startup(function()
       { "nvim-telescope/telescope-fzy-native.nvim" },
       { "nvim-telescope/telescope-media-files.nvim" }
     },
-    config = function()
-      require("plugins.telescope")
-    end
+    config = function() require("plugins.telescope") end
   })
 
   -- Highlighting with Treesitter
@@ -110,18 +101,14 @@ require("packer").startup(function()
     "nvim-treesitter/nvim-treesitter",
     requires = { "p00f/nvim-ts-rainbow" },
     -- run = ":TSUpdate",
-    config = function()
-      require("plugins.treesitter")
-    end
+    config = function() require("plugins.treesitter") end
   })
 
   -- Git integration
 
   use({
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("plugins.gitsigns")
-    end
+    config = function() require("plugins.gitsigns") end
   })
 
   -- File manager
@@ -129,9 +116,7 @@ require("packer").startup(function()
   use({
     "kyazdani42/nvim-tree.lua",
     requires = { "kyazdani42/nvim-web-devicons" },
-    config = function()
-      require("plugins.tree")
-    end
+    config = function() require("plugins.tree") end
   })
 
   -- Markdown support
@@ -140,36 +125,26 @@ require("packer").startup(function()
     "iamcco/markdown-preview.nvim",
     run = { "cd app && yarn install" },
     cmd = "MarkdownPreview",
-    config = function()
-      require("plugins.markdown")
-    end
+    config = function() require("plugins.markdown") end
   })
 
   -- Terminal
 
-  use({
-    "numToStr/FTerm.nvim",
-    config = function()
-      require("plugins.fterm")
-    end
-  })
+  use(
+    { "numToStr/FTerm.nvim", config = function() require("plugins.fterm") end })
 
   -- Statusline & tabline
 
   use({
     "hoob3rt/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
-    config = function()
-      require("plugins.lualine")
-    end
+    config = function() require("plugins.lualine") end
   })
 
   use({
     "akinsho/bufferline.nvim",
     requires = { "nvim-web-devicons", opt = true },
-    config = function()
-      require("plugins.bufferline")
-    end
+    config = function() require("plugins.bufferline") end
   })
 
   -- Utility plugins
@@ -186,40 +161,30 @@ require("packer").startup(function()
   use({
     "b3nj5m1n/kommentary",
     event = "BufRead",
-    config = function()
-      require("plugins.kommentary")
-    end
+    config = function() require("plugins.kommentary") end
   })
 
   use({
     "windwp/nvim-autopairs",
     event = "BufRead",
-    config = function()
-      require("plugins.autopairs")
-    end
+    config = function() require("plugins.autopairs") end
   })
 
   use({
     "norcalli/nvim-colorizer.lua",
     event = "BufRead",
-    config = function()
-      require("plugins.colorizer")
-    end
+    config = function() require("plugins.colorizer") end
   })
 
   use({
     "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("plugins.indent-blankline")
-    end
+    config = function() require("plugins.indent-blankline") end
   })
 
   use({
     "RRethy/vim-illuminate",
     event = "BufRead",
-    config = function()
-      require("plugins.illuminate")
-    end
+    config = function() require("plugins.illuminate") end
   })
 
   use({ "andymass/vim-matchup", opt = true, event = "BufRead" })
