@@ -87,6 +87,7 @@ require("packer").startup(function()
 
   use({
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     requires = {
       { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzy-native.nvim" },
@@ -130,8 +131,11 @@ require("packer").startup(function()
 
   -- Terminal
 
-  use(
-    { "numToStr/FTerm.nvim", config = function() require("plugins.fterm") end })
+  use({
+    "numToStr/FTerm.nvim",
+    cmd = { "FTermOpen", "FTermToggle" },
+    config = function() require("plugins.fterm") end
+  })
 
   -- Statusline & tabline
 
