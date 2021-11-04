@@ -56,7 +56,7 @@ require("packer").startup(function()
     requires = {
       "onsails/lspkind-nvim", "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path"
+      "hrsh7th/cmp-path", "hrsh7th/cmp-cmdline"
     },
     after = "LuaSnip",
     config = function() require("plugins.cmp") end
@@ -72,7 +72,7 @@ require("packer").startup(function()
 
   use({
     "neovim/nvim-lspconfig",
-    requires = { "williamboman/nvim-lsp-installer" },
+    requires = { "williamboman/nvim-lsp-installer", "mfussenegger/nvim-jdtls" },
     after = "nvim-cmp",
     config = function() require("plugins.lspconfig") end
   })
@@ -87,7 +87,6 @@ require("packer").startup(function()
 
   use({
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
     requires = {
       { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzy-native.nvim" },
