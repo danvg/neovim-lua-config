@@ -143,7 +143,16 @@ _G.jdtls_start = function()
   local lombok_jar = jdtls_root .. "/lombok.jar"
   local plugin_jar = jdtls_root ..
                        "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
-  local config_dir = jdtls_root .. "/config_win"
+
+  local config_dir
+  if vim.fn.has("win32") then
+    config_dir = jdtls_root .. "/config_win"
+  elseif vim.fn.has("unix") then
+    config_dir = jdtls_root .. "/config_linux"
+  elseif vim.fn.has("mac") then
+    config_dir = jdtls_root .. "/config_mac"
+  end
+
   local workspace_dir = vim.env.HOME .. "/workspace"
 
   local extendedClientCapabilities = jdtls.extendedClientCapabilities;
