@@ -1,4 +1,5 @@
 -- Global
+vim.opt.shortmess:append("atI")
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -64,4 +65,4 @@ vim.opt.fileformats = "unix,dos"
 vim.opt.spelllang = "en,sv"
 
 vim.opt.syntax = "on"
-vim.api.nvim_exec("filetype plugin indent on", false)
+vim.cmd [[filetype plugin indent on]]

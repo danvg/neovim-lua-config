@@ -7,7 +7,7 @@ M.switch_source_header = function()
     if err then
       error(err)
     else
-      vim.api.nvim_exec("e " .. vim.uri_to_fname(result), false)
+      vim.cmd("e " .. vim.uri_to_fname(result))
     end
   end)
 end

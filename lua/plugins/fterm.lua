@@ -1,4 +1,10 @@
-require("FTerm").setup({
+local fterm_ok, fterm = pcall(require, "FTerm")
+if not fterm_ok then
+  vim.notify("FTerm module not found!")
+  return
+end
+
+fterm.setup({
   cmd = vim.api.nvim_get_option("shell"),
   autoclose = false,
   hl = "Normal",
@@ -6,7 +12,7 @@ require("FTerm").setup({
   dimensions = { height = 0.8, width = 0.8, x = 0.5, y = 0.5 }
 })
 
-vim.api.nvim_exec([[
+vim.cmd [[
   noremap <silent> <leader>tt :lua require("FTerm").toggle()<CR>
   noremap <silent> <leader>tk :lua require("FTerm").exit()<CR>
   noremap <silent> <leader>tg :lua require("FTerm").run("lazygit")<CR>
@@ -15,4 +21,4 @@ vim.api.nvim_exec([[
   command! FTermClose lua require("FTerm").close()
   command! FTermExit lua require("FTerm").exit()
   command! FTermToggle lua require("FTerm").toggle()
-]], false)
+]]

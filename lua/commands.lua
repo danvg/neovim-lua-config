@@ -1,9 +1,7 @@
 function _G.StripTrailingWhitespaces()
   local save = vim.fn.winsaveview()
-  vim.api.nvim_exec([[%s/\v\s+$//e]], false)
+  vim.cmd [[%s/\v\s+$//e]]
   vim.fn.winrestview(save)
 end
 
-vim.api.nvim_exec([[
-  :command! StripTrailingWhitespaces v:lua.StripTrailingWhitespaces()
-]], false)
+vim.cmd [[:command! StripTrailingWhitespaces v:lua.StripTrailingWhitespaces()]]

@@ -1,4 +1,10 @@
-require("gitsigns").setup({
+local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
+if not gitsigns_ok then
+  vim.notify("gitsigns module not found!")
+  return;
+end
+
+gitsigns.setup({
   signs = {
     add = {
       hl = "GitSignsAdd",

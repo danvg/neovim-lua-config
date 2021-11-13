@@ -1,5 +1,11 @@
+local tree_ok, tree = pcall(require, "nvim-tree")
+if not tree_ok then
+  vim.notify("NvimTree module not found!")
+  return
+end
+
 -- following options are the default
-require("nvim-tree").setup {
+tree.setup {
   -- disables netrw completely
   disable_netrw = true,
   -- hijack netrw window on startup
@@ -95,5 +101,5 @@ vim.g.nvim_tree_icons = {
   }
 }
 
-local set_keymap = require("utils").set_keymap
-set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>",
+                        { silent = true, noremap = true })

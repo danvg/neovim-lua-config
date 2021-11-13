@@ -1,7 +1,13 @@
-require("bufferline").setup({
+local bufferline_ok, bufferline = pcall(require, "bufferline")
+if not bufferline_ok then
+  vim.notify("bufferline module not found!")
+  return
+end
+
+bufferline.setup({
   options = {
     view = "multiwindow",
-    indicator_icon = ' ',
+    indicator_icon = " ",
     buffer_close_icon = "",
     modified_icon = "●",
     close_icon = "",
@@ -63,7 +69,7 @@ require("bufferline").setup({
   }
 })
 
-local set_keymap = require("utils").set_keymap
-set_keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>")
-set_keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>")
-set_keymap("n", "gb", "<cmd>BufferLinePick<CR>")
+local opts = { silent = true, noremap = true }
+vim.api.nvim_set_keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>", opts)
+vim.api.nvim_set_keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>", opts)
+vim.api.nvim_set_keymap("n", "gb", "<cmd>BufferLinePick<CR>", opts)

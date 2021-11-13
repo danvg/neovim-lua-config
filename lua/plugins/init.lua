@@ -6,7 +6,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim",
     install_path
   })
-  vim.api.nvim_exec([[packadd packer.nvim]], false)
+  vim.cmd [[packadd packer.nvim]]
 end
 
 local use = require("packer").use
@@ -155,9 +155,9 @@ require("packer").startup(function()
   use({
     "famiu/bufdelete.nvim",
     config = function()
-      local set_keymap = require("utils").set_keymap
-      set_keymap("n", "<leader>q",
-                 "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>")
+      vim.api.nvim_set_keymap("n", "<leader>q",
+                              "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>",
+                              { silent = true, noremap = true })
     end
   })
 

@@ -1,4 +1,10 @@
-local formatters_root = vim.fn.stdpath("data") .. "/formatters"
+local formatter_ok, formatter = pcall(require, "formatter")
+if not formatter_ok then
+  vim.notify("formatter module not found!")
+  return
+end
+
+local formatters_root = vim.env.HOME .. "/.local/share/lang/formatters"
 if vim.fn.isdirectory(formatters_root) then
   local prettier = {
     function()
@@ -45,7 +51,7 @@ if vim.fn.isdirectory(formatters_root) then
     end
   }
 
-  require("formatter").setup({
+  formatter.setup({
     filetype = {
       json = prettier,
       yaml = prettier,

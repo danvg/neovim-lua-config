@@ -1,7 +1,11 @@
-require("lualine").setup {
-  options = {
-    theme = "vscode",
-  },
+local lualine_ok, lualine = pcall(require, "lualine")
+if not lualine_ok then
+  vim.notify("lualine module not found!")
+  return
+end
+
+lualine.setup {
+  options = { theme = "vscode" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },
