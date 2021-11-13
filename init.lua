@@ -1,4 +1,4 @@
-require("toggle_builtin")
+require("disable_builtin")
 require("options")
 require("keymaps")
 require("commands")
