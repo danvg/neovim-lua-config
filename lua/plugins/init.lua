@@ -150,6 +150,17 @@ require("packer").startup(function()
     config = function() require("plugins.bufferline") end
   })
 
+  -- Keybindings
+
+  use({
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        spelling = { enabled = true, suggestions = 10 }
+      }
+    end
+  })
+
   -- Utility plugins
 
   use({
