@@ -35,14 +35,6 @@ local custom_on_attach = function(_, bufnr)
   buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",
                  opts)
   buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  buf_set_keymap("n", "<leader>dl",
-                 "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-  buf_set_keymap("n", "<leader>dn",
-                 "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-  buf_set_keymap("n", "<leader>dp",
-                 "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<leader>dq",
-                 "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
@@ -90,43 +82,12 @@ if lsp_installer_ok then
   end)
 end
 
-vim.fn.sign_define("LspDiagnosticsSignError",
-                   { text = " ", numhl = "LspDiagnosticsDefaultError" })
-
-vim.fn.sign_define("LspDiagnosticsSignInformation", {
-  text = " ",
-  numhl = "LspDiagnosticsDefaultInformation"
-})
-
-vim.fn.sign_define("LspDiagnosticsSignHint",
-                   { text = " ", numhl = "LspDiagnosticsDefaultHint" })
-
-vim.fn.sign_define("LspDiagnosticsSignWarning",
-                   { text = " ", numhl = "LspDiagnosticsDefaultWarning" })
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = { prefix = "", spacing = 0 },
-    signs = true,
-    underline = true,
-    update_in_insert = false -- update diagnostics insert mode
-  })
-
-vim.lsp.handlers["textDocument/hover"] =
-  vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-
-vim.lsp.handlers["textDocument/signatureHelp"] =
-  vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-
 vim.cmd [[
-  :command! LspDiagnostics :lua vim.lsp.diagnostic.set_loclist()<CR>
   :command! LspFormat :lua vim.lsp.buf.formatting()<CR>
   :command! LspSwitchSourceHeader :lua require("plugins.lsp_ext").switch_source_header()<CR>
   :command! LspPeekDeclaration :lua require("plugins.lsp_ext").peek_declaration()<CR>
   :command! LspPeekDefinition :lua require("plugins.lsp_ext").peek_definition()<CR>
 ]]
-
--- vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()]]
 
 -- Setup jdtls
 local jdtls_ok, jdtls = pcall(require, "jdtls")
@@ -218,7 +179,7 @@ if jdtls_ok then
           }
         },
         configuration = {
-          runtimes = { { name = "JavaSE-17", path = vim.env.JAVA_HOME } }
+          runtimes = { { name = "JavaSE-16", path = vim.env.JAVA_HOME } }
         }
       }
     }

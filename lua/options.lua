@@ -66,3 +66,23 @@ vim.opt.spelllang = "en,sv"
 
 vim.opt.syntax = "on"
 vim.cmd [[filetype plugin indent on]]
+
+-- Diagnostics
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false
+})
+
+vim.cmd[[:command! Diagnostics :lua vim.diagnostic.open_float(nil, { focus = false, scope = "buffer" })<CR>]]
+
+-- vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false, scope = "buffer" })]]
