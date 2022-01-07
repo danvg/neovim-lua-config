@@ -174,19 +174,19 @@ require("packer").startup(function()
 
   use({
     "b3nj5m1n/kommentary",
-    event = "BufRead",
+    event = { "BufRead", "BufNew" },
     config = function() require("plugins.kommentary") end
   })
 
   use({
     "windwp/nvim-autopairs",
-    event = "BufRead",
+    event = { "BufRead", "BufNew" },
     config = function() require("plugins.autopairs") end
   })
 
   use({
     "norcalli/nvim-colorizer.lua",
-    event = "BufRead",
+    event = { "BufRead", "BufNew" },
     config = function() require("plugins.colorizer") end
   })
 
@@ -197,11 +197,11 @@ require("packer").startup(function()
 
   use({
     "RRethy/vim-illuminate",
-    event = "BufRead",
+    event = { "BufRead", "BufNew" },
     config = function() require("plugins.illuminate") end
   })
 
-  use({ "andymass/vim-matchup", opt = true, event = "BufRead" })
+  use({ "andymass/vim-matchup", opt = true, event = { "BufRead", "BufNew" }})
 
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
