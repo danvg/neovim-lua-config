@@ -38,6 +38,13 @@ local custom_on_attach = function(_, bufnr)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
+local custom_handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover,
+                                        { border = "rounded" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,
+                                                { border = "rounded" })
+}
+
 local base_capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(
                            base_capabilities)
@@ -48,7 +55,8 @@ if lsp_installer_ok then
     local opts = {
       on_attach = custom_on_attach,
       capabilities = cmp_capabilities,
-      flags = { debounce_text_changes = 150 }
+      flags = { debounce_text_changes = 150 },
+      handlers = custom_handlers
     }
 
     -- setup C/C++ language server
@@ -103,10 +111,10 @@ if jdtls_ok then
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     return {
       flags = { allow_incremental_sync = true },
-      handlers = {
+      handlers = vim.tbl_extend("force", custom_handlers, {
         ["textDocument/publishDiagnostics"] = vim.lsp.diagnostic
           .publishDiagnostics
-      },
+      }),
       capabilities = capabilities,
       on_attach = jdtls_on_attach
     }
