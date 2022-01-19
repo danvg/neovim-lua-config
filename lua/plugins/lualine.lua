@@ -5,7 +5,7 @@ if not lualine_ok then
 end
 
 lualine.setup {
-  options = { theme = "vscode" },
+  options = { theme = "dracula-nvim" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },

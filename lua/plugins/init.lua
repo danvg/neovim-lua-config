@@ -40,8 +40,14 @@ require("packer").startup(function()
   })
   --]]
 
-  use(
+  --[[ use(
     { "Mofiqul/vscode.nvim", config = function() require("plugins.vscode") end })
+ ]]
+
+  use({
+    "Mofiqul/dracula.nvim",
+    config = function() vim.cmd [[colorscheme dracula]] end
+  })
 
   -- LSP, autocomplete, snippets, formatting
 
@@ -201,7 +207,7 @@ require("packer").startup(function()
     config = function() require("plugins.illuminate") end
   })
 
-  use({ "andymass/vim-matchup", opt = true, event = { "BufRead", "BufNew" }})
+  use({ "andymass/vim-matchup", opt = true, event = { "BufRead", "BufNew" } })
 
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
