@@ -49,15 +49,17 @@ local base_capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(
                            base_capabilities)
 
+local base_config = {
+  on_attach = custom_on_attach,
+  capabilities = cmp_capabilities,
+  flags = { debounce_text_changes = 150 },
+  handlers = custom_handlers
+}
+
 local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if lsp_installer_ok then
   lsp_installer.on_server_ready(function(server)
-    local opts = {
-      on_attach = custom_on_attach,
-      capabilities = cmp_capabilities,
-      flags = { debounce_text_changes = 150 },
-      handlers = custom_handlers
-    }
+    local opts = vim.tbl_extend("force", base_config, {})
 
     -- setup C/C++ language server
     if server.name == "clangd" then
@@ -88,6 +90,20 @@ if lsp_installer_ok then
     server:setup(opts)
     vim.cmd [[do User LspAttachBuffers]]
   end)
+end
+
+-- setup Ada language server
+do
+  local config = vim.tbl_extend("force", base_config, {
+    on_init = function(client)
+      local gpr = vim.fn.expand(client.config.root_dir .. "/*.gpr")
+      client.config.settings = { ada = { projectFile = gpr } }
+      print("[als] Using project file: " .. gpr)
+      client.notify("workspace/didChangeConfiguration")
+      return true
+    end
+  })
+  require("lspconfig").als.setup(config)
 end
 
 vim.cmd [[
