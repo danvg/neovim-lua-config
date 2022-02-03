@@ -89,6 +89,12 @@ require("packer").startup(function()
     config = function() require("plugins.formatter") end
   })
 
+  use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function() require("trouble").setup {} end
+  })
+
   -- Find, filter and explore
 
   use({
