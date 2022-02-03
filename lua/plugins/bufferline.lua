@@ -11,6 +11,7 @@ bufferline.setup({
     buffer_close_icon = "",
     modified_icon = "●",
     close_icon = "",
+    close_command = "Bdelete 0",
     left_trunc_marker = "",
     right_trunc_marker = "",
     max_name_length = 14,
