@@ -32,6 +32,7 @@ vim.opt.autowrite = false
 vim.opt.confirm = true
 vim.opt.virtualedit = "block"
 vim.opt.path:append(".,**")
+vim.opt.wildignore:append("*/node_modules/**")
 vim.opt.iskeyword:append("-")
 
 -- Window
