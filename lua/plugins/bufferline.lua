@@ -21,7 +21,7 @@ bufferline.setup({
     show_tab_indicators = true,
     enforce_regular_tabs = true,
     separator_style = "thick",
-    always_show_bufferline = false
+    always_show_bufferline = true
   },
   highlights = {
     fill = {
