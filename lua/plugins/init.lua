@@ -144,7 +144,6 @@ require("packer").startup(function()
 
   use({
     "numToStr/FTerm.nvim",
-    cmd = { "FTermOpen", "FTermToggle" },
     config = function() require("plugins.fterm") end
   })
 
