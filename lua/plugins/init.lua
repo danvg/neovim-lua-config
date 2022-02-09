@@ -142,10 +142,8 @@ require("packer").startup(function()
 
   -- Terminal
 
-  use({
-    "numToStr/FTerm.nvim",
-    config = function() require("plugins.fterm") end
-  })
+  use(
+    { "numToStr/FTerm.nvim", config = function() require("plugins.fterm") end })
 
   -- Statusline & tabline
 
@@ -215,5 +213,7 @@ require("packer").startup(function()
   use({ "andymass/vim-matchup", opt = true, event = { "BufRead", "BufNew" } })
 
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
+
+  use({ "editorconfig/editorconfig-vim" })
 
 end)
