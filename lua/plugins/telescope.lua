@@ -27,7 +27,7 @@ telescope.setup({
     },
     file_sorter = sorters.get_fzy_file,
     file_ignore_patterns = {
-      ".git", "node_modules", "NTUSER*", "ntuser*", "desktop.ini"
+      ".git", "node_modules/*", "NTUSER*", "ntuser*", "desktop.ini"
     },
     generic_sorter = sorters.get_generic_fuzzy_sorter,
     winblend = 0,
