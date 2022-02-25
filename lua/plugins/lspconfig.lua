@@ -38,12 +38,20 @@ local custom_on_attach = function(_, bufnr)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
-local custom_handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover,
-                                        { border = "rounded" }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,
-                                                { border = "rounded" })
+local border = {
+  { "╔", "FloatBorder" }, { "═", "FloatBorder" },
+  { "╗", "FloatBorder" }, { "║", "FloatBorder" },
+  { "╝", "FloatBorder" }, { "═", "FloatBorder" },
+  { "╚", "FloatBorder" }, { "║", "FloatBorder" }
 }
+
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
 local base_capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(
@@ -52,8 +60,7 @@ local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(
 local base_config = {
   on_attach = custom_on_attach,
   capabilities = cmp_capabilities,
-  flags = { debounce_text_changes = 150 },
-  handlers = custom_handlers
+  flags = { debounce_text_changes = 150 }
 }
 
 local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
