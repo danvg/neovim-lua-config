@@ -53,6 +53,8 @@ set_keymap("i", "<Down>", "<C-o>gj")
 
 -- Diagnostics
 set_keymap("n", "<leader>dl",
+           "<cmd>lua vim.diagnostic.open_float(nil, { focus = false, scope = 'line' })<CR>")
+set_keymap("n", "<leader>db",
            "<cmd>lua vim.diagnostic.open_float(nil, { focus = false, scope = 'buffer' })<CR>")
 set_keymap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 set_keymap("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_next()<CR>")
