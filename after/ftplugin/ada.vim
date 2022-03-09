@@ -3,11 +3,11 @@ silent! iunmap <buffer> <Space>aj
 silent! iunmap <buffer> <Space>al
 
 " Try to use standard ada indentation
-setl tabstop=3 shiftwidth=3 softtabstop=2 expandtab
+setl tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Pretty printing
 command! -nargs=0 GnatPP :call system(
-      \'gnatpp --replace --max-line-length=79 --indentation=3
+      \'gnatpp --replace --max-line-length=79 --indentation=2
       \--indent-continuation=2 --eol=lf --wide-character-encoding=8
       \--comments-unchanged --no-separate-is --no-separate-loop-then
       \--number-case-as-declared --enum-case-as-declared
