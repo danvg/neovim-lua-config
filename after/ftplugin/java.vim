@@ -1,11 +1,10 @@
-if filereadable("./gradlew")
-  if has("win32")
-    setlocal makeprg=gradlew\ --no-daemon
-  else
-    setlocal makeprg=./gradlew\ --no-daemon
-  endif
-
-  setlocal path=.,src/main/java/**,src/test/java/**,**/src/main/java/**,**/src/test/java/**
-  setlocal include=^\s*import
-  setlocal includeexpr=substitute(v:fname,'\\.','/',g)
+if filereadable("build.xml")
+  setl makeprg=ant
+  setl path=.,src/**,**/src/**
+elseif filereadable("./gradlew")
+  setl makeprg=./gradlew\ --no-daemon
+  setl path=.,src/main/java/**,src/test/java/**,**/src/main/java/**,**/src/test/java/**
 endif
+
+setl include=^\s*import
+setl includeexpr=substitute(v:fname,'\\.','/',g)
