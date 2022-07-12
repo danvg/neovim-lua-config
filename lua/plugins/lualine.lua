@@ -4,10 +4,13 @@ if not lualine_ok then
   return
 end
 
-local treesitter_ok, treesitter = pcall(require, "nvim-treesitter")
+local navic_ok, navic = pcall(require, "nvim-navic")
+
 local section_c
-if treesitter_ok then
-  local function breadcrumbs() return treesitter.statusline() or "" end
+if navic_ok then
+  local function breadcrumbs()
+    if navic.is_available() then return navic.get_location() else return "" end
+  end
 
   section_c = { "filename", { breadcrumbs } }
 else

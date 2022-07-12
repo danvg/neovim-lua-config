@@ -4,6 +4,9 @@ local custom_on_attach = function(_, bufnr)
   local lsp_signature_ok, lsp_signature = pcall(require, "lsp_signature")
   if lsp_signature_ok then lsp_signature.on_attach() end
 
+  local navic_ok, navic = pcall(require, "nvim-navic")
+  if navic_ok then navic.attach(client, bufnr) end
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 

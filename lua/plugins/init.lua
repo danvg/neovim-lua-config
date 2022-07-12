@@ -83,6 +83,8 @@ require("packer").startup(function()
     config = function() require("plugins.lspconfig") end
   })
 
+  use({ "SmiteshP/nvim-navic", requires = { "nvim-lspconfig" } })
+
   use({
     "mhartington/formatter.nvim",
     cmd = "Format",
