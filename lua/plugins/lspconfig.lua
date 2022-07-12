@@ -1,6 +1,9 @@
+local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_ok then return end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local custom_on_attach = function(_, bufnr)
+local custom_on_attach = function(client, bufnr)
   local lsp_signature_ok, lsp_signature = pcall(require, "lsp_signature")
   if lsp_signature_ok then lsp_signature.on_attach() end
 
@@ -42,9 +45,8 @@ local custom_on_attach = function(_, bufnr)
 end
 
 local border = {
-  { "╔", "FloatBorder" }, { "═", "FloatBorder" },
-  { "╗", "FloatBorder" }, { "║", "FloatBorder" },
-  { "╝", "FloatBorder" }, { "═", "FloatBorder" },
+  { "╔", "FloatBorder" }, { "═", "FloatBorder" }, { "╗", "FloatBorder" },
+  { "║", "FloatBorder" }, { "╝", "FloatBorder" }, { "═", "FloatBorder" },
   { "╚", "FloatBorder" }, { "║", "FloatBorder" }
 }
 
@@ -60,60 +62,84 @@ local base_capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(
                            base_capabilities)
 
-local base_config = {
+local base_settings = {
   on_attach = custom_on_attach,
   capabilities = cmp_capabilities,
   flags = { debounce_text_changes = 150 }
 }
 
-local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if lsp_installer_ok then
-  lsp_installer.on_server_ready(function(server)
-    local opts = vim.tbl_extend("force", base_config, {})
+local servers = {
+  "als", "clangd", "cmake", "cssls", "emmet_ls", "html", "jdtls", "jsonls",
+  "sumneko_lua", "tsserver"
+}
 
-    -- setup C/C++ language server
-    if server.name == "clangd" then
-      opts.cmd = {
-        "clangd", "--enable-config", "--background-index",
-        "--pch-storage=memory", "--all-scopes-completion",
-        "--header-insertion=iwyu", "--fallback-style=Google", "--clang-tidy",
-        "--compile-commands-dir=build"
-      }
-    end
+for _, server in ipairs(servers) do
+  if server == "als" then
+    -- setup Ada language server
+    local settings = vim.tbl_extend("force", base_settings, {})
 
-    -- setup lua language server
-    if server.name == "sumneko_lua" then
-      local runtime_path = vim.split(package.path, ";")
-      table.insert(runtime_path, "lua/?.lua")
-      table.insert(runtime_path, "lua/?/init.lua")
-
-      opts.settings = {
-        Lua = {
-          runtime = { version = "LuaJIT", path = runtime_path },
-          diagnostics = { globals = { "vim" } },
-          workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-          telemetry = { enable = false }
-        }
-      }
-    end
-
-    server:setup(opts)
-    vim.cmd [[do User LspAttachBuffers]]
-  end)
-end
-
--- setup Ada language server
-do
-  local config = vim.tbl_extend("force", base_config, {
-    on_init = function(client)
+    settings.on_init = function(client)
       local gpr = vim.fn.expand(client.config.root_dir .. "/*.gpr")
       client.config.settings = { ada = { projectFile = gpr } }
       print("[als] Using project file: " .. gpr)
       client.notify("workspace/didChangeConfiguration")
       return true
     end
+
+    lspconfig.als.setup(settings)
+  elseif server == "clangd" then
+    -- setup C/C++ language server
+    local settings = vim.tbl_extend("force", base_settings, {})
+
+    settings.cmd = {
+      "clangd", "--enable-config", "--background-index", "--pch-storage=memory",
+      "--all-scopes-completion", "--header-insertion=iwyu",
+      "--fallback-style=Google", "--clang-tidy", "--compile-commands-dir=build"
+    }
+
+    lspconfig.clangd.setup(settings)
+  elseif server == "sumneko_lua" then
+    -- setup lua language server
+    local binary_path = vim.fn.stdpath("data") ..
+                          "/lsp_servers/sumneko_lua/extension/server/bin"
+
+    local exe_path = binary_path .. "/lua-language-server"
+    local main_path = binary_path .. "/main.lua"
+
+    local runtime_path = vim.split(package.path, ";")
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
+
+    local settings = vim.tbl_extend("force", base_settings, {})
+
+    settings.cmd = { exe_path, "-E", main_path }
+    settings.settings = {
+      Lua = {
+        runtime = { version = "LuaJIT", path = runtime_path },
+        diagnostics = { globals = { "vim" } },
+        workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        telemetry = { enable = false }
+      }
+    }
+
+    lspconfig.sumneko_lua.setup(settings)
+  else
+    lspconfig[server].setup(base_settings)
+  end
+end
+
+local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+if lsp_installer_ok then
+  lsp_installer.setup({
+    automatic_installation = true,
+    ui = {
+      icons = {
+        server_installed = "✓",
+        server_pending = "➜",
+        server_uninstalled = "✗"
+      }
+    }
   })
-  require("lspconfig").als.setup(config)
 end
 
 vim.cmd [[
