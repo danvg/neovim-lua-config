@@ -18,7 +18,7 @@ else
 end
 
 lualine.setup {
-  options = { theme = "dracula-nvim" },
+  options = { theme = "tokyonight" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },

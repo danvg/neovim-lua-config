@@ -30,23 +30,12 @@ require("packer").startup(function()
 
   -- Theming
 
-  --[[
   use({
-    "npxbr/gruvbox.nvim",
-    requires = { "rktjmp/lush.nvim" },
+    "folke/tokyonight.nvim",
     config = function()
-      require("plugins.gruvbox")
+      vim.g.tokyonight_sidebars = { "NvimTree" }
+      vim.cmd [[colorscheme tokyonight]]
     end
-  })
-  --]]
-
-  --[[ use(
-    { "Mofiqul/vscode.nvim", config = function() require("plugins.vscode") end })
- ]]
-
-  use({
-    "Mofiqul/dracula.nvim",
-    config = function() vim.cmd [[colorscheme dracula]] end
   })
 
   -- LSP, autocomplete, snippets, formatting
