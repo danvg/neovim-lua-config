@@ -44,6 +44,20 @@ local custom_on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
+local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+if lsp_installer_ok then
+  lsp_installer.setup({
+    automatic_installation = true,
+    ui = {
+      icons = {
+        server_installed = "✓",
+        server_pending = "➜",
+        server_uninstalled = "✗"
+      }
+    }
+  })
+end
+
 local border = {
   { "╔", "FloatBorder" }, { "═", "FloatBorder" }, { "╗", "FloatBorder" },
   { "║", "FloatBorder" }, { "╝", "FloatBorder" }, { "═", "FloatBorder" },
@@ -128,23 +142,8 @@ for _, server in ipairs(servers) do
   end
 end
 
-local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if lsp_installer_ok then
-  lsp_installer.setup({
-    automatic_installation = true,
-    ui = {
-      icons = {
-        server_installed = "✓",
-        server_pending = "➜",
-        server_uninstalled = "✗"
-      }
-    }
-  })
-end
-
 vim.cmd [[
   :command! LspFormat :lua vim.lsp.buf.formatting()<CR>
-  :command! LspSwitchSourceHeader :lua require("plugins.lsp_ext").switch_source_header()<CR>
   :command! LspPeekDeclaration :lua require("plugins.lsp_ext").peek_declaration()<CR>
   :command! LspPeekDefinition :lua require("plugins.lsp_ext").peek_definition()<CR>
 ]]
