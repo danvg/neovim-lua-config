@@ -1,8 +1,4 @@
-local set_keymap = function(mode, left, right, options)
-  local use_options = { silent = true, noremap = true }
-  if options ~= nil then use_options = options end
-  vim.api.nvim_set_keymap(mode, left, right, use_options)
-end
+local set_keymap = require("keymap_util").set_keymap
 
 vim.g.mapleader = " "
 
@@ -59,4 +55,3 @@ set_keymap("n", "<leader>db",
 set_keymap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 set_keymap("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 set_keymap("n", "<leader>dq", "<cmd>lua vim.diagnostic.setloclist()<CR>")
-

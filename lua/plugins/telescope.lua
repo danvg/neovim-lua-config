@@ -79,22 +79,15 @@ telescope.setup({
 telescope.load_extension("fzy_native")
 telescope.load_extension("media_files")
 
-local opts = { silent = true, noremap = true }
-
-vim.api
-  .nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fn",
-                        ":lua require('telescope.builtin').find_files{cwd=vim.fn.stdpath('config')}<CR>",
-                        opts)
-vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<CR>",
-                        opts)
-vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>gf", "<cmd>Telescope git_files<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>",
-                        opts)
-vim.api.nvim_set_keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>",
-                        opts)
-vim.api
-  .nvim_set_keymap("n", "<leader>gs", "<cmd>Telescope git_status<CR>", opts)
+local set_keymap = require("keymap_util").set_keymap
+set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
+set_keymap("n", "<leader>fn",
+           ":lua require('telescope.builtin').find_files{cwd=vim.fn.stdpath('config')}<CR>")
+set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
+set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>")
+set_keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<CR>")
+set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
+set_keymap("n", "<leader>gf", "<cmd>Telescope git_files<CR>")
+set_keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>")
+set_keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>")
+set_keymap("n", "<leader>gs", "<cmd>Telescope git_status<CR>")

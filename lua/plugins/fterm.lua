@@ -12,14 +12,13 @@ fterm.setup({
   dimensions = { height = 0.8, width = 0.8, x = 0.5, y = 0.5 }
 })
 
-local opt = { silent = true, noremap = true }
-local map = vim.api.nvim_set_keymap
-
-map("n", "<leader>tt", "<cmd>lua require('FTerm').toggle()<CR>", opt)
-map("t", "<leader>tt", "<C-\\><C-n><cmd>lua require('FTerm').toggle()<CR>", opt)
-map("n", "<leader>te", "<cmd>lua require('FTerm').exit()<CR>", opt)
-map("t", "<leader>te", "<C-\\><C-n><cmd>lua require('FTerm').exit()<CR>", opt)
-map("n", "<leader>tg", "<cmd>lua require('FTerm').run('lazygit')<CR>", opt)
+local set_keymap = require("keymap_util").set_keymap
+set_keymap("n", "<leader>tt", "<cmd>lua require('FTerm').toggle()<CR>")
+set_keymap("t", "<leader>tt",
+           "<C-\\><C-n><cmd>lua require('FTerm').toggle()<CR>")
+set_keymap("n", "<leader>te", "<cmd>lua require('FTerm').exit()<CR>")
+set_keymap("t", "<leader>te", "<C-\\><C-n><cmd>lua require('FTerm').exit()<CR>")
+set_keymap("n", "<leader>tg", "<cmd>lua require('FTerm').run('lazygit')<CR>")
 
 vim.cmd [[
   command! FTermOpen lua require("FTerm").open()

@@ -22,11 +22,11 @@ bufferline.setup({
     show_tab_indicators = true,
     enforce_regular_tabs = true,
     separator_style = "thick",
-    always_show_bufferline = true
+    always_show_bufferline = false
   }
 })
 
-local opts = { silent = true, noremap = true }
-vim.api.nvim_set_keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>", opts)
-vim.api.nvim_set_keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>", opts)
-vim.api.nvim_set_keymap("n", "gb", "<cmd>BufferLinePick<CR>", opts)
+local set_keymap = require("keymap_util").set_keymap
+set_keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>")
+set_keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>")
+set_keymap("n", "gb", "<cmd>BufferLinePick<CR>")

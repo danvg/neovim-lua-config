@@ -166,7 +166,7 @@ require("packer").startup(function()
   use({
     "famiu/bufdelete.nvim",
     config = function()
-      vim.api.nvim_set_keymap("n", "<leader>q",
+      vim.keymap.set("n", "<leader>q",
                               "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>",
                               { silent = true, noremap = true })
     end

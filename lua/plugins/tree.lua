@@ -103,5 +103,5 @@ vim.g.nvim_tree_icons = {
   }
 }
 
-vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>",
-                        { silent = true, noremap = true })
+local set_keymap = require("keymap_util").set_keymap
+set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
