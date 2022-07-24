@@ -31,10 +31,9 @@ require("packer").startup(function()
   -- Theming
 
   use({
-    "folke/tokyonight.nvim",
+    "projekt0n/github-nvim-theme",
     config = function()
-      vim.g.tokyonight_sidebars = { "NvimTree" }
-      vim.cmd [[colorscheme tokyonight]]
+      require("github-theme").setup({ theme_style = "dimmed" })
     end
   })
 
@@ -67,12 +66,10 @@ require("packer").startup(function()
 
   use({
     "neovim/nvim-lspconfig",
-    requires = { "williamboman/nvim-lsp-installer" },
+    requires = { "williamboman/nvim-lsp-installer", "SmiteshP/nvim-navic" },
     after = "nvim-cmp",
     config = function() require("plugins.lspconfig") end
   })
-
-  use({ "SmiteshP/nvim-navic", requires = { "nvim-lspconfig" } })
 
   use({
     "mhartington/formatter.nvim",
@@ -140,7 +137,9 @@ require("packer").startup(function()
 
   use({
     "hoob3rt/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = {
+      { "kyazdani42/nvim-web-devicons", opt = true }, { "SmiteshP/nvim-navic" }
+    },
     config = function() require("plugins.lualine") end
   })
 
@@ -167,8 +166,8 @@ require("packer").startup(function()
     "famiu/bufdelete.nvim",
     config = function()
       vim.keymap.set("n", "<leader>q",
-                              "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>",
-                              { silent = true, noremap = true })
+                     "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>",
+                     { silent = true, noremap = true })
     end
   })
 
