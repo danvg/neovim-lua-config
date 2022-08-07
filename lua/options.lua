@@ -12,7 +12,8 @@ vim.opt.showmode = false
 vim.opt.showcmd = true
 vim.opt.pumheight = 15
 vim.opt.showtabline = 1
-vim.opt.updatetime = 400
+vim.opt.updatetime = 300
+vim.opt.timeoutlen = 500
 vim.opt.scrolloff = 10
 vim.opt.cmdheight = 1
 vim.opt.termguicolors = true
@@ -32,7 +33,7 @@ vim.opt.autowrite = false
 vim.opt.confirm = true
 vim.opt.virtualedit = "block"
 vim.opt.path:append(".,**")
-vim.opt.wildignore:append("*/node_modules/*,*/__pycache__/*,*/deploy/*,*/assets/*")
+vim.opt.wildignore:append("*/node_modules/*,*/__pycache__/*")
 vim.opt.iskeyword:append("-")
 
 -- Window
@@ -41,7 +42,6 @@ vim.opt.number = true
 vim.opt.numberwidth = 4
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "80"
-vim.opt.conceallevel = 0
 vim.opt.spell = false
 vim.opt.wrap = true
 vim.opt.showbreak = "↪"
@@ -60,13 +60,12 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.swapfile = false
 vim.opt.undofile = true
+vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
+vim.opt.fileencodings = "utf-8,latin1"
 vim.opt.fileformat = "unix"
 vim.opt.fileformats = "unix,dos"
 vim.opt.spelllang = "en,sv"
-
-vim.opt.syntax = "on"
-vim.cmd [[filetype plugin indent on]]
 
 -- Diagnostics
 
@@ -81,9 +80,9 @@ vim.diagnostic.config({
   signs = true,
   underline = true,
   update_in_insert = false,
-  severity_sort = false
+  severity_sort = false,
 })
 
-vim.cmd[[:command! Diagnostics :lua vim.diagnostic.open_float(nil, { focus = false, scope = "buffer" })<CR>]]
-
--- vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false, scope = "buffer" })]]
+vim.api.nvim_create_user_command("Diagnostics", function()
+  vim.diagnostic.open_float(nil, { focus = false, scope = "buffer" })
+end, { bang = true })

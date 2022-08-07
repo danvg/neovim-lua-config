@@ -1,18 +1,31 @@
-local telescope_ok, telescope = pcall(require, "telescope")
-if not telescope_ok then
-  vim.notify("telescope module not found!")
-  return
+if not packer_plugins["plenary.nvim"].loaded then
+  vim.cmd([[packadd plenary.nvim]])
 end
 
+if not packer_plugins["telescope-fzy-native.nvim"].loaded then
+  vim.cmd([[packadd telescope-fzy-native.nvim]])
+end
+
+if not packer_plugins["telescope-media-files.nvim"].loaded then
+  vim.cmd([[packadd telescope-media-files.nvim]])
+end
+
+local telescope = require("telescope")
 local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
+local builtin = require("telescope.builtin")
+local nnoremap = require("keymap_util").nnoremap
 
 telescope.setup({
   defaults = {
     vimgrep_arguments = {
-      "rg", "--no-heading", "--with-filename", "--line-number", "--column",
-      "--smart-case"
+      "rg",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
     },
     prompt_prefix = " ",
     selection_caret = " ",
@@ -23,11 +36,15 @@ telescope.setup({
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = { mirror = false },
-      vertical = { mirror = false }
+      vertical = { mirror = false },
     },
     file_sorter = sorters.get_fzy_file,
     file_ignore_patterns = {
-      ".git", "node_modules/*", "NTUSER*", "ntuser*", "desktop.ini"
+      ".git",
+      "node_modules/*",
+      "NTUSER*",
+      "ntuser*",
+      "desktop.ini",
     },
     generic_sorter = sorters.get_generic_fuzzy_sorter,
     winblend = 0,
@@ -54,40 +71,43 @@ telescope.setup({
         -- ["<C-i>"] = actions.select_horizontal,
 
         -- Add up multiple actions
-        ["<CR>"] = actions.select_default + actions.center
+        ["<CR>"] = actions.select_default + actions.center,
 
         -- You can perform as many actions in a row as you like
         -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
       },
       n = {
         ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous
+        ["<C-k>"] = actions.move_selection_previous,
         -- ["<C-i>"] = my_cool_custom_action,
-      }
-    }
+      },
+    },
   },
   extensions = {
-    fzy_native = { override_generic_sorter = false, override_file_sorter = true },
+    fzy_native = {
+      override_generic_sorter = false,
+      override_file_sorter = true,
+    },
     media_files = {
       -- filetypes whitelist
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = { "png", "webp", "jpg", "jpeg" }
-    }
-  }
+      filetypes = { "png", "webp", "jpg", "jpeg" },
+    },
+  },
 })
 
 telescope.load_extension("fzy_native")
 telescope.load_extension("media_files")
 
-local set_keymap = require("keymap_util").set_keymap
-set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
-set_keymap("n", "<leader>fn",
-           ":lua require('telescope.builtin').find_files{cwd=vim.fn.stdpath('config')}<CR>")
-set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
-set_keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>")
-set_keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<CR>")
-set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>")
-set_keymap("n", "<leader>gf", "<cmd>Telescope git_files<CR>")
-set_keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>")
-set_keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>")
-set_keymap("n", "<leader>gs", "<cmd>Telescope git_status<CR>")
+nnoremap("<leader>ff", builtin.find_files)
+nnoremap("<leader>fn", function()
+  builtin.find_files({ cwd = vim.fn.stdpath("config") })
+end)
+nnoremap("<leader>fg", builtin.live_grep)
+nnoremap("<leader>fh", builtin.help_tags)
+nnoremap("<leader>fc", builtin.colorscheme)
+nnoremap("<leader>fb", builtin.buffers)
+nnoremap("<leader>gf", builtin.git_files)
+nnoremap("<leader>gc", builtin.git_commits)
+nnoremap("<leader>gb", builtin.git_branches)
+nnoremap("<leader>gs", builtin.git_status)

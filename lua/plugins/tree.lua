@@ -1,11 +1,7 @@
-local tree_ok, tree = pcall(require, "nvim-tree")
-if not tree_ok then
-  vim.notify("NvimTree module not found!")
-  return
-end
+local tree = require("nvim-tree")
+local nnoremap = require("keymap_util").nnoremap
 
--- following options are the default
-tree.setup {
+tree.setup({
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_cursor = false,
@@ -30,24 +26,28 @@ tree.setup {
       custom_only = false,
       list = {
         -- user mappings go here
-      }
-    }
+      },
+    },
   },
   renderer = {
     indent_markers = {
       enable = false,
-      icons = { corner = "└ ", edge = "│ ", none = "  " }
+      icons = { corner = "└ ", edge = "│ ", none = "  " },
     },
-    icons = { webdev_colors = true }
+    icons = { webdev_colors = true },
   },
   hijack_directories = { enable = true, auto_open = true },
-  update_focused_file = { enable = false, update_cwd = false, ignore_list = {} },
+  update_focused_file = {
+    enable = false,
+    update_cwd = false,
+    ignore_list = {},
+  },
   ignore_ft_on_setup = {},
   system_open = { cmd = "", args = {} },
   diagnostics = {
     enable = false,
     show_on_dirs = false,
-    icons = { hint = "", info = "", warning = "", error = "" }
+    icons = { hint = "", info = "", warning = "", error = "" },
   },
   filters = { dotfiles = false, custom = {}, exclude = {} },
   git = { enable = true, ignore = true, timeout = 400 },
@@ -62,12 +62,17 @@ tree.setup {
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
         exclude = {
           filetype = {
-            "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame"
+            "notify",
+            "packer",
+            "qf",
+            "diff",
+            "fugitive",
+            "fugitiveblame",
           },
-          buftype = { "nofile", "terminal", "help" }
-        }
-      }
-    }
+          buftype = { "nofile", "terminal", "help" },
+        },
+      },
+    },
   },
   trash = { cmd = "trash", require_confirm = true },
   log = {
@@ -79,10 +84,10 @@ tree.setup {
       copy_paste = false,
       diagnostics = false,
       git = false,
-      profile = false
-    }
-  }
-}
+      profile = false,
+    },
+  },
+})
 
 vim.g.nvim_tree_icons = {
   default = "",
@@ -92,16 +97,15 @@ vim.g.nvim_tree_icons = {
     staged = "✓",
     unmerged = "",
     renamed = "➜",
-    untracked = ""
+    untracked = "",
   },
   folder = {
     default = "",
     open = "",
     empty = "",
     empty_open = "",
-    symlink = ""
-  }
+    symlink = "",
+  },
 }
 
-local set_keymap = require("keymap_util").set_keymap
-set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+nnoremap("<leader>e", "<cmd>NvimTreeToggle<CR>")

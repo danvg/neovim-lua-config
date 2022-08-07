@@ -1,15 +1,18 @@
 local M = {}
 
 M.switch_source_header = function()
-  vim.lsp.buf_request(0, "textDocument/switchSourceHeader",
-                      vim.lsp.util.make_text_document_params(),
-                      function(err, result, ctx, config)
-    if err then
-      error(err)
-    else
-      vim.cmd("e " .. vim.uri_to_fname(result))
+  vim.lsp.buf_request(
+    0,
+    "textDocument/switchSourceHeader",
+    vim.lsp.util.make_text_document_params(),
+    function(err, result, ctx, config)
+      if err then
+        error(err)
+      else
+        vim.cmd("e " .. vim.uri_to_fname(result))
+      end
     end
-  end)
+  )
 end
 
 M.preview_location = function(location, context, before_context)
@@ -17,14 +20,20 @@ M.preview_location = function(location, context, before_context)
   context = context or 15
   before_context = before_context or 0
   local uri = location.targetUri or location.uri
-  if uri == nil then return end
+  if uri == nil then
+    return
+  end
   local bufnr = vim.uri_to_bufnr(uri)
-  if not vim.api.nvim_buf_is_loaded(bufnr) then vim.fn.bufload(bufnr) end
+  if not vim.api.nvim_buf_is_loaded(bufnr) then
+    vim.fn.bufload(bufnr)
+  end
   local range = location.targetRange or location.range
-  local contents = vim.api.nvim_buf_get_lines(bufnr, range.start.line -
-                                                before_context,
-                                              range["end"].line + 1 + context,
-                                              false)
+  local contents = vim.api.nvim_buf_get_lines(
+    bufnr,
+    range.start.line - before_context,
+    range["end"].line + 1 + context,
+    false
+  )
   local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
   return vim.lsp.util.open_floating_preview(contents, filetype)
 end
@@ -51,8 +60,12 @@ M.peek_declaration = function()
     vim.api.nvim_set_current_win(M.floating_win)
   else
     local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(0, "textDocument/declaration", params,
-                               M.preview_location_callback)
+    return vim.lsp.buf_request(
+      0,
+      "textDocument/declaration",
+      params,
+      M.preview_location_callback
+    )
   end
 end
 
@@ -61,8 +74,12 @@ M.peek_definition = function()
     vim.api.nvim_set_current_win(M.floating_win)
   else
     local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(0, "textDocument/definition", params,
-                               M.preview_location_callback)
+    return vim.lsp.buf_request(
+      0,
+      "textDocument/definition",
+      params,
+      M.preview_location_callback
+    )
   end
 end
 

@@ -1,12 +1,12 @@
-local luasnip_ok, luasnip = pcall(require, "luasnip")
-if not luasnip_ok then
-  vim.notify("luasnip module not found!")
-  return
+if not packer_plugins["friendly-snippets"] then
+  vim.cmd([[packadd friendly-snippets]])
 end
+
+local luasnip = require("luasnip")
 
 luasnip.config.set_config({
   history = true,
-  updateevents = "TextChanged,TextChangedI"
+  updateevents = "TextChanged,TextChangedI",
 })
 
 require("luasnip.loaders.from_vscode").load()

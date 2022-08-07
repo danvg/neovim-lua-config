@@ -1,8 +1,5 @@
-local bufferline_ok, bufferline = pcall(require, "bufferline")
-if not bufferline_ok then
-  vim.notify("bufferline module not found!")
-  return
-end
+local bufferline = require("bufferline")
+local nnoremap = require("keymap_util").nnoremap
 
 bufferline.setup({
   options = {
@@ -22,11 +19,10 @@ bufferline.setup({
     show_tab_indicators = true,
     enforce_regular_tabs = true,
     separator_style = "thick",
-    always_show_bufferline = false
-  }
+    always_show_bufferline = false,
+  },
 })
 
-local set_keymap = require("keymap_util").set_keymap
-set_keymap("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>")
-set_keymap("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<CR>")
-set_keymap("n", "gb", "<cmd>BufferLinePick<CR>")
+nnoremap("<TAB>", "<cmd>BufferLineCycleNext<CR>")
+nnoremap("<S-TAB>", "<cmd>BufferLineCyclePrev<CR>")
+nnoremap("gb", "<cmd>BufferLinePick<CR>")
