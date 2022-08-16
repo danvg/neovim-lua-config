@@ -1,4 +1,4 @@
--- Global
+-- Global options
 vim.opt.shortmess:append("atI")
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
@@ -21,7 +21,7 @@ vim.opt.mouse = "a"
 vim.opt.hidden = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.completeopt = "menu,menuone,noselect,noinsert"
 vim.opt.hlsearch = false
 vim.opt.signcolumn = "auto"
 vim.opt.list = true
@@ -36,21 +36,25 @@ vim.opt.path:append(".,**")
 vim.opt.wildignore:append("*/node_modules/*,*/__pycache__/*")
 vim.opt.iskeyword:append("-")
 
--- Window
+-- Window options
 vim.opt.relativenumber = false
 vim.opt.number = true
 vim.opt.numberwidth = 4
 vim.opt.cursorline = true
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = nil -- "80"
 vim.opt.spell = false
 vim.opt.wrap = true
 vim.opt.showbreak = "↪"
 vim.opt.linebreak = true
 vim.opt.foldmethod = "marker"
-vim.opt.foldnestmax = 1
+vim.opt.foldnestmax = 2
 vim.opt.foldcolumn = "1"
 
--- Buffer
+if vim.fn.has("nvim-0.8") == 1 then
+  vim.opt.winbar = "%=%m %F"
+end
+
+-- Buffer options
 local indent = 2
 vim.opt.tabstop = indent
 vim.opt.softtabstop = indent
@@ -68,7 +72,6 @@ vim.opt.fileformats = "unix,dos"
 vim.opt.spelllang = "en,sv"
 
 -- Diagnostics
-
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type

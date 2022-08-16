@@ -20,6 +20,6 @@ local builtin_plugins = {
   "zipPlugin",
 }
 
-for _, plug in ipairs(builtin_plugins) do
-  vim.g["loaded_" .. plug] = 1
+for _, plugin in ipairs(builtin_plugins) do
+  vim.g["loaded_" .. plugin] = 1
 end
