@@ -146,9 +146,18 @@ for _, server in ipairs(servers) do
       lang_tools.get_mason_lua_lsp_main(),
     }
 
+    local library = {}
+    local globals = { "vim", "packer_plugins" }
+
+    if vim.fn.isdirectory("/usr/share/awesome/lib") then
+      library = { "/usr/share/awesome/lib" }
+      globals = { "vim", "packer_plugins", "awesome", "screen", "client", "root" }
+    end
+
     opts.settings = {
       Lua = {
-        diagnostics = { globals = { "vim", "packer_plugins" } },
+        workspace = { library = library },
+        diagnostics = { globals = globals },
         telemetry = { enable = false },
       },
     }
