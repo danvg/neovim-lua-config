@@ -31,8 +31,9 @@ require("packer").startup(function(use)
 
   -- Default theme
   use({
-    "projekt0n/github-nvim-theme",
-    config = get_config("github-theme"),
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = get_config("catppuccin"),
   })
 
   -- Statusline, tabline, winbar
