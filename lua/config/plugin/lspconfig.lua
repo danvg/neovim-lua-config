@@ -89,6 +89,8 @@ for _, server in ipairs(servers) do
     -- setup Ada language server
     local opts = vim.tbl_extend("force", lsp_opts, {})
 
+    opts.cmd = { lang_tools.get_mason_cmd("ada_language_server") }
+
     opts.on_init = function(client)
       local available =
         vim.fn.expand(client.config.root_dir .. "/*.gpr", true, true)
@@ -146,24 +148,16 @@ for _, server in ipairs(servers) do
       lang_tools.get_mason_lua_lsp_main(),
     }
 
-    local library = {}
-    local globals = { "vim", "packer_plugins" }
-
-    if vim.fn.isdirectory("/usr/share/awesome/lib") then
-      library = { "/usr/share/awesome/lib" }
-      globals = { "vim", "packer_plugins", "awesome", "screen", "client", "root" }
-    end
-
     opts.settings = {
       Lua = {
-        workspace = { library = library },
-        diagnostics = { globals = globals },
+        diagnostics = { globals = { "vim", "packer_plugins" } },
         telemetry = { enable = false },
       },
     }
 
-    opts = require("lua-dev").setup({ lspconfig = opts })
-    lspconfig.sumneko_lua.setup(opts)
+    local dev_opts = require("lua-dev").setup({ lspconfig = opts })
+
+    lspconfig.sumneko_lua.setup(dev_opts)
   else
     lspconfig[server].setup(lsp_opts)
   end
