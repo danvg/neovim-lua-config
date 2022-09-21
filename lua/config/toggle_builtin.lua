@@ -23,3 +23,14 @@ local builtin_plugins = {
 for _, plugin in ipairs(builtin_plugins) do
   vim.g["loaded_" .. plugin] = 1
 end
+
+local providers = {
+  "python3",
+  "ruby",
+  "perl",
+  "node",
+}
+
+for _, provider in ipairs(providers) do
+  vim.g["loaded_" .. provider .. "_provider"] = 0
+end
