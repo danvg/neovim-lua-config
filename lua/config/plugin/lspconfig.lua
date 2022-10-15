@@ -2,8 +2,8 @@ if not packer_plugins["lsp_signature.nvim"].loaded then
   vim.cmd([[packadd lsp_signature.nvim]])
 end
 
-if not packer_plugins["lua-dev.nvim"].loaded then
-  vim.cmd([[packadd lua-dev.nvim]])
+if not packer_plugins["neodev.nvim"].loaded then
+  vim.cmd([[packadd neodev.nvim]])
 end
 
 if not packer_plugins["nvim-navic"].loaded then
@@ -14,6 +14,7 @@ if not packer_plugins["cmp-nvim-lsp"].loaded then
   vim.cmd([[packadd cmp-nvim-lsp]])
 end
 
+require("neodev").setup({})
 local lspconfig = require("lspconfig")
 local lang_tools = require("config.lang_tools")
 
@@ -61,9 +62,7 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
   return open_floating_preview(contents, syntax, opts, ...)
 end
 
-local base_capabilities = vim.lsp.protocol.make_client_capabilities()
-local cmp_capabilities =
-  require("cmp_nvim_lsp").update_capabilities(base_capabilities)
+local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lsp_opts = {
   on_attach = on_attach,
@@ -155,9 +154,7 @@ for _, server in ipairs(servers) do
       },
     }
 
-    local dev_opts = require("lua-dev").setup({ lspconfig = opts })
-
-    lspconfig.sumneko_lua.setup(dev_opts)
+    lspconfig.sumneko_lua.setup(opts)
   else
     lspconfig[server].setup(lsp_opts)
   end
