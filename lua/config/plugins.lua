@@ -185,7 +185,7 @@ require("packer").startup(function(use)
     },
     requires = {
       { "ray-x/lsp_signature.nvim", opt = true },
-      { "folke/lua-dev.nvim", opt = true },
+      { "folke/neodev.nvim", opt = true },
       { "SmiteshP/nvim-navic", opt = true },
     },
     config = get_config("lspconfig"),
