@@ -76,7 +76,6 @@ local servers = {
   "cmake",
   "cssls",
   "html",
-  "jdtls",
   "jsonls",
   "sumneko_lua",
   "tsserver",

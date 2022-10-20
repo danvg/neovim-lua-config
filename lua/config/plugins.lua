@@ -191,6 +191,8 @@ require("packer").startup(function(use)
     config = get_config("lspconfig"),
   })
 
+  use({ "mfussenegger/nvim-jdtls", opt = true })
+
   -- Installer of LSP servers, formatters, linters etc.
   use({
     "williamboman/mason.nvim",
