@@ -179,7 +179,6 @@ require("packer").startup(function(use)
       "javascript",
       "typescript",
       "json",
-      "java",
       "vim",
       "lua",
     },
@@ -196,15 +195,9 @@ require("packer").startup(function(use)
   -- Installer of LSP servers, formatters, linters etc.
   use({
     "williamboman/mason.nvim",
+    requires = { "williamboman/mason-lspconfig.nvim", opt = true },
     cmd = "Mason",
     config = get_config("mason"),
-  })
-
-  -- LSP integration
-  use({
-    "williamboman/mason-lspconfig.nvim",
-    after = "nvim-lspconfig",
-    config = get_config("mason-lspconfig"),
   })
 
   -- Show LSP server status

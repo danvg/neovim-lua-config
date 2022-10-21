@@ -1,74 +1,23 @@
-if not packer_plugins["lsp_signature.nvim"].loaded then
-  vim.cmd([[packadd lsp_signature.nvim]])
-end
-
-if not packer_plugins["neodev.nvim"].loaded then
-  vim.cmd([[packadd neodev.nvim]])
-end
-
-if not packer_plugins["nvim-navic"].loaded then
-  vim.cmd([[packadd nvim-navic]])
-end
-
-if not packer_plugins["cmp-nvim-lsp"].loaded then
-  vim.cmd([[packadd cmp-nvim-lsp]])
-end
+require("config.lazy").load({
+  "lsp_signature.nvim",
+  "nvim-navic",
+  "cmp-nvim-lsp",
+  "neodev.nvim",
+})
 
 require("neodev").setup({})
 local lspconfig = require("lspconfig")
 local lang_tools = require("config.lang_tools")
 
-local on_attach = function(client, bufnr)
+local lsp_opts = require("config.lsp_opts")
+lsp_opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local on_attach = lsp_opts.on_attach
+lsp_opts.on_attach = function(client, bufnr)
   require("lsp_signature").on_attach()
   require("nvim-navic").attach(client, bufnr)
-
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- Mappings.
-  local function buf_map(mode, lhs, rhs)
-    local opts = { silent = true, buffer = bufnr }
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_map("n", "gD", vim.lsp.buf.declaration)
-  buf_map("n", "gd", vim.lsp.buf.definition)
-  buf_map("n", "K", vim.lsp.buf.hover)
-  buf_map("n", "gi", vim.lsp.buf.implementation)
-  buf_map("n", "<C-k>", vim.lsp.buf.signature_help)
-  buf_map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder)
-  buf_map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder)
-  buf_map("n", "<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_foders()))
-  end)
-  buf_map("n", "<leader>ds", function()
-    print(vim.inspect(vim.lsp.buf.document_symbol()))
-  end)
-  buf_map("n", "<leader>D", vim.lsp.buf.type_definition)
-  buf_map("n", "<leader>rn", vim.lsp.buf.rename)
-  buf_map("n", "<leader>ca", vim.lsp.buf.code_action)
-  buf_map("n", "gr", vim.lsp.buf.references)
-  buf_map("n", "<leader>f", function()
-    vim.lsp.buf.format({ async = true })
-  end)
+  on_attach(client, bufnr)
 end
-
--- To instead override globally
-local open_floating_preview = vim.lsp.util.open_floating_preview
-vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or "single"
-  return open_floating_preview(contents, syntax, opts, ...)
-end
-
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local lsp_opts = {
-  on_attach = on_attach,
-  capabilities = cmp_capabilities,
-  flags = { debounce_text_changes = 150 },
-}
 
 local servers = {
   "als",
@@ -158,7 +107,3 @@ for _, server in ipairs(servers) do
     lspconfig[server].setup(lsp_opts)
   end
 end
-
-vim.api.nvim_create_user_command("LspFormat", function()
-  vim.lsp.buf.format({ async = true })
-end, { bang = true })

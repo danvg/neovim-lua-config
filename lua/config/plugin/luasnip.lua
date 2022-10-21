@@ -1,6 +1,4 @@
-if not packer_plugins["friendly-snippets"].loaded then
-  vim.cmd([[packadd friendly-snippets]])
-end
+require("config.lazy").load("friendly-snippets")
 
 require("luasnip").config.setup({
   history = true,

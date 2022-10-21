@@ -1,10 +1,4 @@
-if not packer_plugins["LuaSnip"].loaded then
-  vim.cmd([[packadd LuaSnip]])
-end
-
-if not packer_plugins["lspkind-nvim"].loaded then
-  vim.cmd([[packadd lspkind-nvim]])
-end
+require("config.lazy").load({ "LuaSnip", "lspkind-nvim" })
 
 local cmp = require("cmp")
 local luasnip = require("luasnip")

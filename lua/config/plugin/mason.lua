@@ -8,3 +8,6 @@ require("mason").setup({
     },
   },
 })
+
+require("config.lazy").load("mason-lspconfig.nvim")
+require("mason-lspconfig").setup()

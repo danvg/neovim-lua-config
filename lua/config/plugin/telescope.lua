@@ -1,10 +1,7 @@
-if not packer_plugins["plenary.nvim"].loaded then
-  vim.cmd([[packadd plenary.nvim]])
-end
-
-if not packer_plugins["telescope-fzy-native.nvim"].loaded then
-  vim.cmd([[packadd telescope-fzy-native.nvim]])
-end
+require("config.lazy").load({
+  "plenary.nvim",
+  "telescope-fzy-native.nvim",
+})
 
 local telescope = require("telescope")
 local actions = require("telescope.actions")

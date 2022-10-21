@@ -1,6 +1,4 @@
-if not packer_plugins["nvim-navic"].loaded then
-  vim.cmd([[packadd nvim-navic]])
-end
+require("config.lazy").load("nvim-navic")
 
 require("lualine").setup({
   options = {
