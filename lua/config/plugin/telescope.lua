@@ -41,6 +41,7 @@ telescope.setup({
       "desktop.ini",
       "packer_compiled.lua",
       "spell/*",
+      "**/*.class",
     },
     generic_sorter = sorters.get_generic_fuzzy_sorter,
     winblend = 0,

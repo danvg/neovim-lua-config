@@ -36,11 +36,14 @@ require("packer").startup(function(use)
     config = get_config("catppuccin"),
   })
 
+  -- Common
+  use({ "nvim-lua/plenary.nvim" })
+  use({ "kyazdani42/nvim-web-devicons" })
+
   -- Statusline, tabline, winbar
   use({
     "hoob3rt/lualine.nvim",
     requires = {
-      "kyazdani42/nvim-web-devicons",
       { "SmiteshP/nvim-navic", opt = true },
     },
     event = { "BufRead", "BufNew" },
@@ -97,6 +100,7 @@ require("packer").startup(function(use)
   -- Measure startup time
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
+  -- Project editor configuration
   use({ "editorconfig/editorconfig-vim", event = { "BufRead", "BufEnter" } })
 
   -- Key discovery
@@ -116,7 +120,6 @@ require("packer").startup(function(use)
   -- Explorer panel
   use({
     "kyazdani42/nvim-tree.lua",
-    requires = { "kyazdani42/nvim-web-devicons" },
     cmd = "NvimTreeToggle",
     keys = "<leader>e",
     config = get_config("tree"),
@@ -125,7 +128,6 @@ require("packer").startup(function(use)
   -- Git support
   use({
     "lewis6991/gitsigns.nvim",
-    requires = { "kyazdani42/nvim-web-devicons" },
     event = { "BufRead", "BufNew" },
     config = get_config("gitsigns"),
   })
@@ -134,7 +136,6 @@ require("packer").startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     requires = {
-      { "nvim-lua/plenary.nvim", opt = true },
       { "nvim-telescope/telescope-fzy-native.nvim", opt = true },
     },
     cmd = "Telescope",
@@ -190,12 +191,13 @@ require("packer").startup(function(use)
     config = get_config("lspconfig"),
   })
 
+  -- Java language support
   use({ "mfussenegger/nvim-jdtls", opt = true })
 
   -- Installer of LSP servers, formatters, linters etc.
   use({
     "williamboman/mason.nvim",
-    requires = { "williamboman/mason-lspconfig.nvim", opt = true },
+    requires = { { "williamboman/mason-lspconfig.nvim", opt = true } },
     cmd = "Mason",
     config = get_config("mason"),
   })
@@ -240,5 +242,27 @@ require("packer").startup(function(use)
     config = function()
       require("nvim-dap-virtual-text").setup({})
     end,
+  })
+
+  -- Document symbols
+  use({
+    "stevearc/aerial.nvim",
+    cmd = { "AerialOpen", "AerialToggle" },
+    config = get_config("aerial"),
+  })
+
+  -- Startup window
+  use({
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    config = get_config("alpha"),
+  })
+
+  -- Session management
+  use({
+    "Shatur/neovim-session-manager",
+    event = "BufWritePost",
+    cmd = "SessionManager",
+    config = get_config("session_manager"),
   })
 end)

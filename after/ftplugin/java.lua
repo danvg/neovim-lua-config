@@ -3,6 +3,7 @@ require("config.lazy").load({
   "nvim-navic",
   "cmp-nvim-lsp",
   "nvim-jdtls",
+  "nvim-dap",
 })
 
 local lsp_opts = require("config.lsp_opts")
@@ -13,6 +14,8 @@ lsp_opts.on_attach = function(client, bufnr)
   require("lsp_signature").on_attach()
   require("nvim-navic").attach(client, bufnr)
   require("jdtls.setup").add_commands()
+  require("jdtls").setup_dap({ hotcodereplace = "auto" })
+  require("jdtls.dap").setup_dap_main_class_configs()
   on_attach(client, bufnr)
 end
 
@@ -71,52 +74,74 @@ local config = {
       },
       configuration = {
         updateBuildConfiguration = "interactive",
-      },
-      maven = {
-        downloadSources = true,
-      },
-      implementationsCodeLens = {
-        enabled = true,
-      },
-      referencesCodeLens = {
-        enabled = true,
-      },
-      references = {
-        includeDecompiledSources = true,
-      },
-      inlayHints = {
-        parameterNames = {
-          enabled = "all", -- literals, all, none
+        runtimes = {
+          {
+            name = "JavaSE-11",
+            path = vim.fn.glob(
+              vim.fn.stdpath("data") .. "/java/jdk/openjdk_11*"
+            ),
+          },
+          {
+            name = "JavaSE-19",
+            path = vim.fn.glob(
+              vim.fn.stdpath("data") .. "/java/jdk/openjdk_19*"
+            ),
+          },
+        },
+        maven = {
+          downloadSources = true,
+        },
+        implementationsCodeLens = {
+          enabled = true,
+        },
+        referencesCodeLens = {
+          enabled = true,
+        },
+        references = {
+          includeDecompiledSources = true,
+        },
+        inlayHints = {
+          parameterNames = {
+            enabled = "all", -- literals, all, none
+          },
+        },
+        format = {
+          enabled = true,
         },
       },
-      format = {
-        enabled = true,
+      signatureHelp = { enabled = true },
+      completion = {
+        filteredTypes = {
+          "java.awt.List",
+          "com.sun.*",
+        },
+        favoriteStaticMembers = {
+          "org.junit.jupiter.api.Assertions.*",
+          "java.util.Objects.requireNonNull",
+          "java.util.Objects.requireNonNullElse",
+        },
       },
-    },
-    signatureHelp = { enabled = true },
-    completion = {
-      favoriteStaticMembers = {
-        "org.junit.jupiter.api.Assertions.*",
-        "java.util.Objects.requireNonNull",
-        "java.util.Objects.requireNonNullElse",
+      contentProvider = { preferred = "fernflower" },
+      sources = {
+        organizeImports = {
+          starThreshold = 9999,
+          staticStarThreshold = 9999,
+        },
       },
-    },
-    contentProvider = { preferred = "fernflower" },
-    sources = {
-      organizeImports = {
-        starThreshold = 9999,
-        staticStarThreshold = 9999,
+      codeGeneration = {
+        toString = {
+          template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+        },
+        useBlocks = true,
       },
-    },
-    codeGeneration = {
-      toString = {
-        template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-      },
-      useBlocks = true,
     },
   },
   init_options = {
-    bundles = {},
+    bundles = {
+      vim.fn.glob(
+        vim.fn.stdpath("data") .. "/java/com.microsoft.java.debug.plugin-*.jar"
+      ),
+    },
     extendedClientCapabilities = extendedClientCapabilities,
   },
   on_attach = lsp_opts.on_attach,
@@ -126,7 +151,15 @@ local config = {
     lsp_opts.flags,
     { allow_incremental_sync = true }
   ),
+  handlers = lsp_opts.handlers,
 }
+
+config.on_init = function(client, _)
+  client.notify(
+    "workspace/didChangeConfigurations",
+    { settings = config.settings }
+  )
+end
 
 require("jdtls").start_or_attach(config)
 

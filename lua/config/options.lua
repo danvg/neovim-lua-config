@@ -21,7 +21,7 @@ vim.opt.mouse = "a"
 vim.opt.hidden = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.completeopt = "menu,menuone,noselect,noinsert"
+vim.opt.completeopt = "menu,noselect"
 vim.opt.hlsearch = false
 vim.opt.signcolumn = "auto"
 vim.opt.list = true
@@ -33,7 +33,7 @@ vim.opt.autowrite = false
 vim.opt.confirm = true
 vim.opt.virtualedit = "block"
 vim.opt.path:append(".,**")
-vim.opt.wildignore:append("*/node_modules/*,*/__pycache__/*")
+vim.opt.wildignore:append("*/node_modules/*,*/__pycache__/*,*/*.class")
 vim.opt.iskeyword:append("-")
 
 -- Window options

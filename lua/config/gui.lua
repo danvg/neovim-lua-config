@@ -1,5 +1,5 @@
 local default_font_family = "monospace"
-local default_font_size = 13
+local default_font_size = 10
 
 local font = {
   family = (function()
