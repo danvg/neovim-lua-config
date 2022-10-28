@@ -41,6 +41,26 @@ local jdtls_data_path = os.getenv("HOME") .. "/.cache/jdtls/" .. project_name
 local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
+local bundles = {
+  vim.fn.glob(
+    vim.fn.stdpath("data")
+      .. "/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
+    true
+  ),
+}
+
+vim.list_extend(
+  bundles,
+  vim.split(
+    vim.fn.glob(
+      vim.fn.stdpath("data")
+        .. "/mason/packages/java-test/extension/server/*.jar",
+      true
+    ),
+    "\n"
+  )
+)
+
 local config = {
   cmd = {
     os.getenv("JAVA_HOME") .. "/bin/java",
@@ -78,13 +98,19 @@ local config = {
           {
             name = "JavaSE-11",
             path = vim.fn.glob(
-              vim.fn.stdpath("data") .. "/java/jdk/openjdk_11*"
+              os.getenv("HOME") .. "/.cache/java/jdk/openjdk_11*"
+            ),
+          },
+          {
+            name = "JavaSE-18",
+            path = vim.fn.glob(
+              os.getenv("HOME") .. "/.cache/java/jdk/openjdk_18*"
             ),
           },
           {
             name = "JavaSE-19",
             path = vim.fn.glob(
-              vim.fn.stdpath("data") .. "/java/jdk/openjdk_19*"
+              os.getenv("HOME") .. "/.cache/java/jdk/openjdk_19*"
             ),
           },
         },
@@ -137,11 +163,7 @@ local config = {
     },
   },
   init_options = {
-    bundles = {
-      vim.fn.glob(
-        vim.fn.stdpath("data") .. "/java/com.microsoft.java.debug.plugin-*.jar"
-      ),
-    },
+    bundles = bundles,
     extendedClientCapabilities = extendedClientCapabilities,
   },
   on_attach = lsp_opts.on_attach,
@@ -170,3 +192,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({ async = false })
   end,
 })
+
+vim.api.nvim_create_user_command("JdtTestClass", function()
+  require("jdtls.dap").test_class()
+end, { bang = true })
+
+vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+  require("jdtls.dap").test_nearest_method()
+end, { bang = true })
