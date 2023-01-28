@@ -1,3 +1,5 @@
+local M = {}
+
 local function strip_trailing_spaces()
   local save = vim.fn.winsaveview()
   vim.cmd([[%s/\v\s+$//e]])
@@ -21,23 +23,31 @@ local function web_search_cw()
   web_search(cword)
 end
 
-vim.api.nvim_create_user_command(
-  "StripTrailingSpaces",
-  strip_trailing_spaces,
-  { bang = true }
-)
+M.setup = function()
+  vim.api.nvim_create_user_command(
+    "StripTrailingSpaces",
+    strip_trailing_spaces,
+    { bang = true }
+  )
 
-vim.api.nvim_create_user_command(
-  "WebSearch",
-  web_search,
-  { bang = true, nargs = "*" }
-)
+  vim.api.nvim_create_user_command(
+    "WebSearch",
+    web_search,
+    { bang = true, nargs = "*" }
+  )
 
-vim.api.nvim_create_user_command("WebSearchCW", web_search_cw, { bang = true })
+  vim.api.nvim_create_user_command(
+    "WebSearchCW",
+    web_search_cw,
+    { bang = true }
+  )
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 800 })
-  end,
-})
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+    callback = function()
+      vim.highlight.on_yank({ higroup = "IncSearch", timeout = 800 })
+    end,
+  })
+end
+
+return M
