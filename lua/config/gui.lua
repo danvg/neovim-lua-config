@@ -1,7 +1,7 @@
 local M = {}
 
 local default_font_family = "monospace"
-local default_font_size = 10
+local default_font_size = 9
 
 local font = {
   family = (function()
