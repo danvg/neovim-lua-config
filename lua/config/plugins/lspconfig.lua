@@ -25,6 +25,9 @@ return {
     mason_lspconfig.setup()
 
     mason_lspconfig.setup_handlers({
+      function (server)
+        require("lspconfig")[server].setup({})
+      end,
       ["als"] = require("config.plugins.lsp.als"),
       ["clangd"] = require("config.plugins.lsp.clangd"),
       ["jdtls"] = function() end,
