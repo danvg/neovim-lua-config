@@ -1,16 +1,25 @@
 local M = {}
 
-local default_font_family = "monospace"
-local default_font_size = 9
+local function on_windows_os()
+  return string.match(vim.loop.os_uname().sysname, "[w|W]indows") ~= nil
+end
 
-local font = {
-  family = (function()
-    if string.match(vim.loop.os_uname().sysname, "[w|W]indows") ~= nil then
+local default_font_family = (function()
+  if vim.env.EDITOR_FONT_FAMILY ~= nil then
+    return vim.env.EDITOR_FONT_FAMILY
+  else
+    if on_windows_os() then
       return "JetBrainsMono NF"
     else
-      return default_font_family
+      return "monospace"
     end
-  end)(),
+  end
+end)()
+
+local default_font_size = vim.env.EDITOR_FONT_SIZE or 9
+
+local font = {
+  family = default_font_family,
   size = default_font_size,
 }
 
