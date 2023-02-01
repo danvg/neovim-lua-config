@@ -69,7 +69,7 @@ require("packer").startup(function(use)
   use(get_config("autopairs"))
 
   -- File explorer
-  use(get_config("tree"))
+  use(get_config("neo-tree"))
 
   -- Git support
   use(get_config("gitsigns"))
