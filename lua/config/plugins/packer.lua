@@ -86,6 +86,9 @@ require("packer").startup(function(use)
   -- Show LSP server progress
   use(get_config("fidget"))
 
+  -- Debugging
+  use(get_config("dap"))
+
   -- Smart diagnostics location window
   use(get_config("trouble"))
 
