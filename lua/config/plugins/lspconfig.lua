@@ -22,10 +22,24 @@ return {
 
     local mason_lspconfig = require("mason-lspconfig")
 
-    mason_lspconfig.setup()
+    mason_lspconfig.setup({
+      ensure_installed = {
+        "als",
+        "clangd",
+        "cmake",
+        "cssls",
+        "html",
+        "jdtls",
+        "jsonls",
+        "sumneko_lua",
+        "pyright",
+        "tsserver",
+        "vimls",
+      },
+    })
 
     mason_lspconfig.setup_handlers({
-      function (server)
+      function(server)
         require("lspconfig")[server].setup({})
       end,
       ["als"] = require("config.plugins.lsp.als"),
