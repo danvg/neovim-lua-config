@@ -7,8 +7,11 @@ return {
     { "williamboman/mason-lspconfig.nvim" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "mfussenegger/nvim-jdtls" },
+    { "folke/neodev.nvim" },
   },
   config = function()
+    require("neodev").setup({})
+
     require("mason").setup({
       ui = {
         border = "single",
