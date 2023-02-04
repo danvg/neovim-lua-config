@@ -46,4 +46,5 @@ return {
     update_debounce = 200,
     status_formatter = nil, -- Use default
   },
+  config = true,
 }

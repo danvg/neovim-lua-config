@@ -29,6 +29,7 @@ return {
       indent = { enable = true },
       rainbow = { enable = true },
     },
+    config = true,
   },
   { "p00f/nvim-ts-rainbow" },
 }

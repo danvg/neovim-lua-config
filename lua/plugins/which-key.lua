@@ -4,4 +4,5 @@ return {
   opts = {
     spelling = { enabled = true, suggestions = 12 },
   },
+  config = true,
 }
