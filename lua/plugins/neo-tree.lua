@@ -1,13 +1,19 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v2.x",
-  requires = {
+  dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
+    "kyazdani42/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
   cmd = "Neotree",
-  keys = "<leader>e",
+  keys = {
+    {
+      "<leader>e",
+      "<cmd>Neotree toggle<cr>",
+      desc = "Toggles the file explorer",
+    },
+  },
   config = function()
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
     require("neo-tree").setup({
@@ -22,6 +28,5 @@ return {
         },
       },
     })
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>")
   end,
 }

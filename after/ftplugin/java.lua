@@ -1,3 +1,5 @@
+---@diagnostic disable: missing-parameter
+
 local jdtls = require("jdtls")
 local mason_reg = require("mason-registry")
 
@@ -39,8 +41,8 @@ else
   vim.notify("Missing Java debugger")
 end
 
-local common_opts = require("config.plugins.lsp.options")
-local opts = vim.tbl_extend("force", common_opts, {})
+local lsp_opts = require("config.lsp")
+local opts = vim.tbl_extend("force", lsp_opts, {})
 
 local default_on_attach = opts.on_attach
 opts.on_attach = function(client, bufnr)
@@ -63,6 +65,8 @@ opts.on_attach = function(client, bufnr)
 
   default_on_attach(client, bufnr)
 end
+
+opts.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local os_name
 if vim.fn.has("mac") == 1 then

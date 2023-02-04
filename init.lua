@@ -1,23 +1,70 @@
-local function setup()
-  require("config.options").setup()
-  require("config.diagnostics").setup()
-  require("config.keymaps").setup()
-  require("config.gui").setup()
-  require("config.extras").setup()
-  require("config.plugins").setup()
+local M = {}
+
+local function disable_builtins()
+  local builtin_plugins = {
+    "2html_plugin",
+    "getscript",
+    "getscriptPlugin",
+    "gzip",
+    "logipat",
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "matchit",
+    "tar",
+    "tarPlugin",
+    "rrhelper",
+    "spellfile_plugin",
+    "vimball",
+    "vimballPlugin",
+    "zip",
+    "zipPlugin",
+  }
+
+  for _, plugin in ipairs(builtin_plugins) do
+    vim.g["loaded_" .. plugin] = 1
+  end
+
+  local providers = {
+    "python3",
+    "ruby",
+    "perl",
+    "node",
+  }
+
+  for _, provider in ipairs(providers) do
+    vim.g["loaded_" .. provider .. "_provider"] = 0
+  end
 end
 
-setup()
+local function bootstrap_plugin_manager()
+  local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
--- Auto source config files
-local source_init_grp =
-  vim.api.nvim_create_augroup("source_init_grp", { clear = true })
+  if not vim.loop.fs_stat(lazy_path) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable",
+      lazy_path,
+    })
+  end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  group = source_init_grp,
-  pattern = { "**/nvim/*.lua" },
-  callback = function()
-    vim.notify("Sourcing init file")
-    setup()
-  end,
-})
+  vim.opt.rtp:prepend(lazy_path)
+end
+
+M.setup = function()
+  disable_builtins()
+  require("config").setup()
+  require("lazy").setup("plugins")
+end
+
+if _G.CONFIG_BOOTSTRAP == nil or _G.CONFIG_BOOTSTRAP == false then
+  bootstrap_plugin_manager()
+  M.setup()
+  _G.CONFIG_BOOTSTRAP = true
+end
+
+return M

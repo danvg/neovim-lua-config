@@ -1,12 +1,10 @@
 return {
   "nvim-telescope/telescope.nvim",
-  requires = {
+  dependencies = {
     "nvim-lua/plenary.nvim",
     "kyazdani42/nvim-web-devicons",
     "nvim-telescope/telescope-fzy-native.nvim",
   },
-  cmd = "Telescope",
-  keys = { "<leader>ff", "<leader>fg", "<leader>fn" },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")

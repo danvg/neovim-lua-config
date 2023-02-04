@@ -1,6 +1,5 @@
 return {
   "jose-elias-alvarez/null-ls.nvim",
-  after = "nvim-lspconfig",
   config = function()
     local null_ls = require("null-ls")
     local formatting = null_ls.builtins.formatting
