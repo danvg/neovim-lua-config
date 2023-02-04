@@ -13,7 +13,6 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "onsails/lspkind-nvim",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lua",
@@ -41,7 +40,16 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        formatting = { format = require("lspkind").cmp_format() },
+        -- formatting = { format = require("lspkind").cmp_format() },
+        formatting = {
+          format = function(_, item)
+            local kinds = require("config.icons").kinds
+            if kinds[item.kind] then
+              item.kind = kinds[item.kind] .. item.kind
+            end
+            return item
+          end,
+        },
         mapping = {
           ["<C-p>"] = cmp.mapping.select_prev_item({
             behavior = cmp.SelectBehavior.Insert,
