@@ -125,6 +125,7 @@ return {
           diagnostics = { globals = { "vim", "packer_plugins" } },
           telemetry = { enable = false },
           format = { enable = false },
+          hint = { enable = true },
         },
       }
 
