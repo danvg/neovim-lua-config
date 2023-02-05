@@ -40,7 +40,6 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        -- formatting = { format = require("lspkind").cmp_format() },
         formatting = {
           format = function(_, item)
             local kinds = require("config.icons").kinds
