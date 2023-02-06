@@ -9,9 +9,28 @@ return {
   cmd = "Neotree",
   keys = {
     {
-      "<leader>e",
-      "<cmd>Neotree toggle<cr>",
-      desc = "Toggles the file explorer",
+      "<leader>ee",
+      "<cmd>Neotree show filesystem<cr>",
+      "n",
+      desc = "Shows the file explorer",
+    },
+    {
+      "<leader>eg",
+      "<cmd>Neotree show git_status<cr>",
+      "n",
+      desc = "Shows the git status",
+    },
+    {
+      "<leader>eb",
+      "<cmd>Neotree show buffers<cr>",
+      "n",
+      desc = "Shows the open buffers",
+    },
+    {
+      "<leader>ec",
+      "<cmd>Neotree close<cr>",
+      "n",
+      desc = "Close explorer",
     },
   },
   config = function()
