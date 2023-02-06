@@ -46,7 +46,6 @@ local opts = vim.tbl_extend("force", lsp_opts, {})
 
 local default_on_attach = opts.on_attach
 opts.on_attach = function(client, bufnr)
-  require("lsp_signature").on_attach()
   require("nvim-navic").attach(client, bufnr)
   require("jdtls.setup").add_commands()
 

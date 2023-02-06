@@ -1,7 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "ray-x/lsp_signature.nvim",
     "SmiteshP/nvim-navic",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -44,7 +43,6 @@ return {
 
     local lsp_opts = {
       on_attach = function(client, bufnr)
-        require("lsp_signature").on_attach()
         require("nvim-navic").attach(client, bufnr)
         require("config.lsp").on_attach(client, bufnr)
       end,
