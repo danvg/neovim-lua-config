@@ -10,19 +10,19 @@ return {
   keys = {
     {
       "<leader>ee",
-      "<cmd>Neotree show filesystem<cr>",
+      "<cmd>Neotree filesystem<cr>",
       "n",
       desc = "Shows the file explorer",
     },
     {
       "<leader>eg",
-      "<cmd>Neotree show git_status<cr>",
+      "<cmd>Neotree git_status<cr>",
       "n",
       desc = "Shows the git status",
     },
     {
       "<leader>eb",
-      "<cmd>Neotree show buffers<cr>",
+      "<cmd>Neotree buffers<cr>",
       "n",
       desc = "Shows the open buffers",
     },
