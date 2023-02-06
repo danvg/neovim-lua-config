@@ -29,7 +29,7 @@ return {
           "  Open last session",
           "<cmd>SessionManager load_last_session<CR>"
         ),
-        theme.button("u", "  Update plugins", "<cmd>PackerSync<CR>"),
+        theme.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
         theme.button("q", "  Quit", "<cmd>qa<CR>"),
       },
       opts = {
