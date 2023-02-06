@@ -15,7 +15,8 @@ return {
     },
   },
   config = function()
-    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+    vim.g.neo_tree_remove_legacy_commands = 1
+
     require("neo-tree").setup({
       filesystem = {
         filtered_items = {
@@ -23,6 +24,7 @@ return {
         },
       },
       window = {
+        width = 30,
         mappings = {
           ["<space>"] = "noop",
         },
