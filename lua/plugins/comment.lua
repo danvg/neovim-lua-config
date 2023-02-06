@@ -1,5 +1,5 @@
 return {
   "numToStr/Comment.nvim",
-  event = { "BufRead", "BufEnter" },
+  keys = { "gc", "gb" },
   config = true,
 }
