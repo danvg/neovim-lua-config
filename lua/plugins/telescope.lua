@@ -5,14 +5,65 @@ return {
     "kyazdani42/nvim-web-devicons",
     "nvim-telescope/telescope-fzy-native.nvim",
   },
+  cmd = "Telescope",
+  keys = {
+    {
+      "<leader>ff",
+      "<cmd>Telescope find_files<cr>",
+      desc = "Find files",
+    },
+    {
+      "<leader>fn",
+      "<cmd>Telescope find_files cwd=" .. vim.fn.stdpath("config") .. "<cr>",
+      desc = "Find Neovim config files",
+    },
+    {
+      "<leader>fg",
+      "<cmd>Telescope live_grep<cr>",
+      desc = "Live grep in current directory",
+    },
+    {
+      "<leader>fh",
+      "<cmd>Telescope help_tags<cr>",
+      desc = "Find help tags",
+    },
+    {
+      "<leader>fc",
+      "<cmd>Telescope colorscheme<cr>",
+      desc = "Find colorscheme",
+    },
+    {
+      "<leader>fb",
+      "<cmd>Telescope buffers<cr>",
+      desc = "Find buffer",
+    },
+    {
+      "<leader>gf",
+      "<cmd>Telescope git_files<cr>",
+      desc = "Find git file",
+    },
+    {
+      "<leader>gc",
+      "<cmd>Telescope git_commits<cr>",
+      desc = "Find git commits",
+    },
+    {
+      "<leader>gb",
+      "<cmd>Telescope git_branches<cr>",
+      desc = "Find git branches",
+    },
+    {
+      "<leader>gs",
+      "<cmd>Telescope git_status<cr>",
+      desc = "Find git status",
+    },
+  },
   config = function()
-    local telescope = require("telescope")
     local actions = require("telescope.actions")
     local sorters = require("telescope.sorters")
     local previewers = require("telescope.previewers")
-    local builtin = require("telescope.builtin")
 
-    telescope.setup({
+    require("telescope").setup({
       defaults = {
         vimgrep_arguments = {
           "rg",
@@ -91,18 +142,5 @@ return {
     })
 
     require("telescope").load_extension("fzy_native")
-
-    vim.keymap.set("n", "<leader>ff", builtin.find_files)
-    vim.keymap.set("n", "<leader>fn", function()
-      builtin.find_files({ cwd = vim.fn.stdpath("config") })
-    end)
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep)
-    vim.keymap.set("n", "<leader>fh", builtin.help_tags)
-    vim.keymap.set("n", "<leader>fc", builtin.colorscheme)
-    vim.keymap.set("n", "<leader>fb", builtin.buffers)
-    vim.keymap.set("n", "<leader>gf", builtin.git_files)
-    vim.keymap.set("n", "<leader>gc", builtin.git_commits)
-    vim.keymap.set("n", "<leader>gb", builtin.git_branches)
-    vim.keymap.set("n", "<leader>gs", builtin.git_status)
   end,
 }

@@ -8,6 +8,7 @@ return {
     "mfussenegger/nvim-jdtls",
     "folke/neodev.nvim",
     "j-hui/fidget.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
   },
   config = function()
     require("neodev").setup({})
@@ -141,5 +142,18 @@ return {
     })
 
     require("fidget").setup()
+
+    local null_ls = require("null-ls")
+    local formatting = null_ls.builtins.formatting
+    local diagnostics = null_ls.builtins.diagnostics
+    null_ls.setup({
+      sources = {
+        formatting.stylua,
+        formatting.clang_format,
+        formatting.cmake_format,
+        formatting.prettier,
+        diagnostics.cpplint,
+      },
+    })
   end,
 }
