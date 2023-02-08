@@ -51,7 +51,41 @@ return {
         automatic_setup = true,
       })
 
-      mason_dap.setup_handlers()
+      mason_dap.setup_handlers({
+        function(source_name)
+          require("mason-nvim-dap.automatic_setup")(source_name)
+        end,
+        cppdbg = function(source_name)
+          dap.adapters[source_name] = {
+            id = "cppdbg",
+            type = "executable",
+            command = vim.fn.exepath("OpenDebugAD7"),
+            options = {
+              detached = false,
+            },
+          }
+
+          dap.configurations.cpp = {
+            {
+              name = "(gdb) Launch file",
+              type = "cppdbg",
+              request = "launch",
+              program = function()
+                return vim.fn.input({
+                  prompt = "Path to executable: ",
+                  default = vim.fs.normalize(vim.fn.getcwd() .. "/"),
+                  completion = "file",
+                })
+              end,
+              args = {},
+              stopAtEntry = true,
+              cwd = "${workspaceFolder}",
+              MIMode = "gdb",
+              miDebuggerPath = vim.fn.exepath("gdb"),
+            },
+          }
+        end,
+      })
 
       -- keymaps
       vim.keymap.set("n", "F5", dap.continue)
