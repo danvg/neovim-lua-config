@@ -35,7 +35,7 @@ return {
         "html",
         "jdtls",
         "jsonls",
-        "sumneko_lua",
+        "lua_ls",
         "pyright",
         "tsserver",
         "vimls",
@@ -116,10 +116,10 @@ return {
       require("lspconfig").clangd.setup(clangd_opts)
     end
 
-    local function setup_sumneko_lua()
-      local sumneko_lua_opts = vim.tbl_extend("force", lsp_opts, {})
+    local function setup_lua_ls()
+      local lua_ls_opts = vim.tbl_extend("force", lsp_opts, {})
 
-      sumneko_lua_opts.settings = {
+      lua_ls_opts.settings = {
         Lua = {
           diagnostics = { globals = { "vim", "packer_plugins" } },
           telemetry = { enable = false },
@@ -128,7 +128,7 @@ return {
         },
       }
 
-      require("lspconfig").sumneko_lua.setup(sumneko_lua_opts)
+      require("lspconfig").lua_ls.setup(lua_ls_opts)
     end
 
     mason_lspconfig.setup_handlers({
@@ -138,7 +138,7 @@ return {
       ["als"] = setup_als,
       ["clangd"] = setup_clangd,
       ["jdtls"] = function() end,
-      ["sumneko_lua"] = setup_sumneko_lua,
+      ["lua_ls"] = setup_lua_ls,
     })
 
     require("fidget").setup()
