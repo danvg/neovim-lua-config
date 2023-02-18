@@ -152,8 +152,16 @@ return {
         formatting.clang_format,
         formatting.cmake_format,
         formatting.prettier,
+        formatting.autopep8,
         diagnostics.cpplint,
+        diagnostics.flake8,
       },
     })
   end,
+
+  vim.api.nvim_create_user_command("NullLsFormat", function()
+    vim.lsp.buf.format({ async = true })
+  end, {
+    bang = true,
+  }),
 }
