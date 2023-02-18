@@ -9,7 +9,7 @@ local default_font_family = (function()
     return vim.env.EDITOR_FONT_FAMILY
   else
     if on_windows_os() then
-      return "JetBrainsMono NF"
+      return "Consolas"
     else
       return "monospace"
     end
