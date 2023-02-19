@@ -5,11 +5,6 @@ if env_colorscheme ~= nil then
     colorscheme = "catppuccin"
   elseif env_colorscheme == "gruvbox" then
     colorscheme = "gruvbox"
-  else
-    vim.notify(
-      "Unknown environment defined colorscheme " .. env_colorscheme,
-      "warning"
-    )
   end
 end
 
