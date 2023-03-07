@@ -66,6 +66,15 @@ M.setup = function()
   vim.keymap.set("n", "<leader>cc", "<cmd>cclose<cr>")
   vim.keymap.set("n", "<leader>cp", "<cmd>cprev<cr>")
   vim.keymap.set("n", "<leader>cn", "<cmd>cnext<cr>")
+
+  -- Terminal
+  vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
+  vim.keymap.set("t", "jk", [[<C-\><C-n>]])
+  vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
+  vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
+  vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+  vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
+  vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]])
 end
 
 return M
