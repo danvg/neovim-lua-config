@@ -73,6 +73,14 @@ M.setup = function()
   vim.opt.fileformat = "unix"
   vim.opt.fileformats = "unix,dos"
   vim.opt.spelllang = "en,sv"
+
+  -- Shell
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    vim.opt.shell = "pwsh -NoLogo"
+    vim.opt.shellcmdflag = "-command"
+    vim.opt.shellquote = "\\"
+    vim.opt.shellxquote = ""
+  end
 end
 
 return M
