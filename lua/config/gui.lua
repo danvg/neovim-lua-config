@@ -29,19 +29,19 @@ end
 
 local function increase_font_size()
   font.size = font.size + 1
-  vim.notify("Font size increase to " .. tostring(font.size))
+  print("Font size increase to " .. tostring(font.size))
   update_font()
 end
 
 local function decrease_font_size()
   font.size = font.size - 1
-  vim.notify("Font size decrease to " .. tostring(font.size))
+  print("Font size decrease to " .. tostring(font.size))
   update_font()
 end
 
 local function reset_font_size()
   font.size = default_font_size
-  vim.notify("Font size reset to " .. tostring(font.size))
+  print("Font size reset to " .. tostring(font.size))
   update_font()
 end
 
@@ -51,12 +51,31 @@ local function set_keymaps()
   vim.keymap.set("n", "<C-0>", reset_font_size)
 end
 
+local function set_cmds()
+  vim.api.nvim_create_user_command(
+    "GuiFontIncrease",
+    increase_font_size,
+    { bang = true }
+  )
+  vim.api.nvim_create_user_command(
+    "GuiFontDecrease",
+    decrease_font_size,
+    { bang = true }
+  )
+  vim.api.nvim_create_user_command(
+    "GuiFontReset",
+    reset_font_size,
+    { bang = true }
+  )
+end
+
 M.setup = function()
   vim.api.nvim_create_autocmd("UIEnter", {
     once = true,
     callback = function()
       update_font()
       set_keymaps()
+      set_cmds()
     end,
   })
 end
