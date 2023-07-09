@@ -76,7 +76,7 @@ M.setup = function()
 
   -- Shell
   if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.opt.shell = "pwsh -NoLogo"
+    vim.opt.shell = "pwsh -NoLogo -NoProfile"
     vim.opt.shellcmdflag = "-command"
     vim.opt.shellquote = "\\"
     vim.opt.shellxquote = ""
