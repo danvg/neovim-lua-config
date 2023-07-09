@@ -5,12 +5,15 @@ if env_colorscheme ~= nil then
     colorscheme = "catppuccin"
   elseif env_colorscheme == "gruvbox" then
     colorscheme = "gruvbox"
+  elseif env_colorscheme == "github" then
+    colorscheme = "github"
   end
 end
 
 --- Get which night light mode to use given the current time.
+--- @param change_background? boolean Modifies vim.opt.background.
 --- @return "dark"|"light"
-local function night_light()
+local function night_light(change_background)
   local mode = "dark"
 
   if
@@ -49,6 +52,11 @@ local function night_light()
       mode = "light"
     end
   end
+
+  if type(change_background) == "boolean" and change_background == true then
+    vim.opt.background = mode
+  end
+
   return mode
 end
 
@@ -67,11 +75,9 @@ return {
       },
     },
     config = function(_, opts)
-      if night_light() == "dark" then
-        vim.opt.background = "dark"
+      if night_light(true) == "dark" then
         opts.flavour = opts.background.dark
       else
-        vim.opt.background = "light"
         opts.flavour = opts.background.light
       end
       require("catppuccin").setup(opts)
@@ -84,13 +90,24 @@ return {
     lazy = false,
     priority = 9999,
     config = function()
-      if night_light() == "dark" then
-        vim.opt.background = "dark"
-      else
-        vim.opt.background = "light"
-      end
+      night_light(true)
       require("gruvbox").setup({})
       vim.cmd.colorscheme("gruvbox")
+    end,
+  },
+  {
+    "projekt0n/github-nvim-theme",
+    enabled = colorscheme == "github",
+    lazy = false,
+    priority = 9999,
+    config = function()
+      local mode = night_light(true)
+      require("github-theme").setup({})
+      if mode == "light" then
+        vim.cmd.colorscheme("github_light")
+      else
+        vim.cmd.colorscheme("github_dark")
+      end
     end,
   },
 }
