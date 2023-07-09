@@ -37,11 +37,6 @@ return {
       },
       numhl = false,
       linehl = false,
-      keymaps = {
-        -- Default keymap options
-        noremap = true,
-        buffer = true,
-      },
       watch_gitdir = { interval = 2000 },
       sign_priority = 6,
       update_debounce = 200,
