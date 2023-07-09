@@ -7,8 +7,8 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "mfussenegger/nvim-jdtls",
     "folke/neodev.nvim",
-    "j-hui/fidget.nvim",
     "jose-elias-alvarez/null-ls.nvim",
+    { "j-hui/fidget.nvim", tag = "legacy" },
   },
   config = function()
     require("neodev").setup({})
@@ -133,7 +133,7 @@ return {
 
     mason_lspconfig.setup_handlers({
       function(server)
-        require("lspconfig")[server].setup({})
+        require("lspconfig")[server].setup(lsp_opts)
       end,
       ["als"] = setup_als,
       ["clangd"] = setup_clangd,
