@@ -49,42 +49,68 @@ return {
       mason_dap.setup({
         ensure_installed = { "cpptools", "java-test", "java-debug-adapter" },
         automatic_setup = true,
-      })
+        handlers = {
+          function(config)
+            require("mason-nvim-dap").default_setup(config)
+          end,
+          cppdbg = function(source_name)
+            dap.adapters[source_name] = {
+              id = "cppdbg",
+              type = "executable",
+              command = vim.fn.exepath("OpenDebugAD7"),
+              options = {
+                detached = false,
+              },
+            }
 
-      mason_dap.setup_handlers({
-        function(source_name)
-          require("mason-nvim-dap.automatic_setup")(source_name)
-        end,
-        cppdbg = function(source_name)
-          dap.adapters[source_name] = {
-            id = "cppdbg",
-            type = "executable",
-            command = vim.fn.exepath("OpenDebugAD7"),
-            options = {
-              detached = false,
-            },
-          }
-
-          dap.configurations.cpp = {
-            {
-              name = "(gdb) Launch file",
-              type = "cppdbg",
-              request = "launch",
-              program = function()
-                return vim.fn.input({
-                  prompt = "Path to executable: ",
-                  default = vim.fs.normalize(vim.fn.getcwd() .. "/"),
-                  completion = "file",
-                })
-              end,
-              args = {},
-              stopAtEntry = true,
-              cwd = "${workspaceFolder}",
-              MIMode = "gdb",
-              miDebuggerPath = vim.fn.exepath("gdb"),
-            },
-          }
-        end,
+            dap.configurations.cpp = {
+              {
+                name = "(gdb) Launch file",
+                type = "cppdbg",
+                request = "launch",
+                program = function()
+                  return vim.fn.input({
+                    prompt = "Path to executable: ",
+                    default = vim.fs.normalize(vim.fn.getcwd() .. "/"),
+                    completion = "file",
+                  })
+                end,
+                args = {},
+                stopAtEntry = true,
+                cwd = "${workspaceFolder}",
+                MIMode = "gdb",
+                miDebuggerPath = vim.fn.exepath("gdb"),
+              },
+            }
+          end,
+          coreclr = function()
+            dap.adapters.netcoredbg = {
+              type = "executable",
+              command = vim.fn.exepath(
+                vim.fn.stdpath("data")
+                  .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg"
+              ),
+              args = { "--interpreter=vscode" },
+            }
+            dap.configurations.cs = {
+              {
+                type = "netcoredbg",
+                name = "NetCoreDbg: Launch",
+                request = "launch",
+                cwd = "${fileDirname}",
+                program = function()
+                  local cwd = vim.fn.getcwd()
+                  local d = vim.fn.fnamemodify(cwd, ":t")
+                  return vim.fn.input(
+                    "Path to dll: ",
+                    vim.fs.normalize(cwd .. "/bin/Debug/net6.0/" .. d .. ".dll"),
+                    "file"
+                  )
+                end,
+              },
+            }
+          end,
+        },
       })
 
       -- keymaps
