@@ -1,12 +1,20 @@
-local colorscheme = "default"
+local available_colorschemes = {
+  "catppuccin",
+  "gruvbox",
+  "github",
+  "nightfox",
+}
+
+local colorscheme = available_colorschemes[1]
+
 local env_colorscheme = vim.fn.getenv("EDITOR_COLORSCHEME")
 if env_colorscheme ~= nil then
-  if env_colorscheme == "catppuccin" then
-    colorscheme = "catppuccin"
-  elseif env_colorscheme == "gruvbox" then
-    colorscheme = "gruvbox"
-  elseif env_colorscheme == "github" then
-    colorscheme = "github"
+  env_colorscheme = env_colorscheme:lower()
+  for _, cs in ipairs(available_colorschemes) do
+    if cs == env_colorscheme then
+      colorscheme = cs
+      break
+    end
   end
 end
 
@@ -107,6 +115,20 @@ return {
         vim.cmd.colorscheme("github_light")
       else
         vim.cmd.colorscheme("github_dark")
+      end
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    enabled = colorscheme == "nightfox",
+    lazy = false,
+    priority = 9999,
+    config = function()
+      local mode = night_light(true)
+      if mode == "light" then
+        vim.cmd.colorscheme("dayfox")
+      else
+        vim.cmd.colorscheme("nightfox")
       end
     end,
   },
