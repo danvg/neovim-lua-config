@@ -56,6 +56,18 @@ M.setup = function()
       )
     end,
   })
+
+  -- XML-like files
+  autocmd({ "BufNewFile", "BufRead" }, {
+    group = group,
+    pattern = { "*.xaml", "*.axaml" },
+    callback = function()
+      vim.cmd.setf("xml")
+      vim.bo.tabstop = 4
+      vim.bo.softtabstop = 4
+      vim.bo.shiftwidth = 4
+    end,
+  })
 end
 
 return M
