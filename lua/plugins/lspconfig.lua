@@ -14,6 +14,7 @@ return {
     require("neodev").setup({})
 
     require("mason").setup({
+      PATH = "append", -- Use the system binary if available
       ui = {
         border = "single",
         icons = {
@@ -60,9 +61,7 @@ return {
       local als_opts = vim.tbl_extend("force", lsp_opts, {})
 
       als_opts.cmd = {
-        vim.fn.exepath(
-          vim.fn.stdpath("data") .. "/mason/bin/ada_language_server"
-        ),
+        vim.fn.exepath("ada_language_server"),
       }
 
       als_opts.on_init = function(client)
@@ -102,7 +101,7 @@ return {
       local clangd_opts = vim.tbl_extend("force", lsp_opts, {})
 
       clangd_opts.cmd = {
-        vim.fn.exepath(vim.fn.stdpath("data") .. "/mason/bin/clangd"),
+        vim.fn.exepath("clangd"),
         "--enable-config",
         "--background-index",
         "--pch-storage=memory",
@@ -153,13 +152,14 @@ return {
         formatting.cmake_format,
         formatting.prettier,
         formatting.autopep8,
+        formatting.xmlformat,
         diagnostics.cpplint,
         diagnostics.flake8,
       },
     })
   end,
 
-  vim.api.nvim_create_user_command("NullLsFormat", function()
+  vim.api.nvim_create_user_command("Format", function()
     vim.lsp.buf.format({ async = true })
   end, {
     bang = true,

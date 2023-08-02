@@ -32,7 +32,7 @@ M.on_attach = function(client, bufnr)
     vim.lsp.buf.format({ async = true })
   end)
 
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+  vim.api.nvim_buf_create_user_command(bufnr, "LspFormat", function()
     vim.lsp.buf.format({ async = true })
   end, {
     bang = true,
@@ -49,9 +49,12 @@ M.handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "single",
   }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "single",
-  }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
+    {
+      border = "single",
+    }
+  ),
 }
 
 return M
