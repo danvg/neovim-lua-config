@@ -88,8 +88,9 @@ return {
         },
         file_sorter = sorters.get_fzy_file,
         file_ignore_patterns = {
-          ".git/",
-          "node_modules/",
+          "%.git/",
+          "node%_modules/",
+          "package-lock.json",
           "%.class",
           "NTUSER%",
           "ntuser%",

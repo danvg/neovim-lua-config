@@ -7,8 +7,8 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "mfussenegger/nvim-jdtls",
     "folke/neodev.nvim",
-    "jose-elias-alvarez/null-ls.nvim",
-    { "j-hui/fidget.nvim", tag = "legacy" },
+    "nvimtools/none-ls.nvim",
+    "j-hui/fidget.nvim",
   },
   config = function()
     require("neodev").setup({})
@@ -140,28 +140,39 @@ return {
       ["lua_ls"] = setup_lua_ls,
     })
 
-    require("fidget").setup()
+    require("fidget").setup({})
 
+    local lsp_fmt_au_group
+    vim.api.nvim_create_augroup("LspFormatting", {})
     local null_ls = require("null-ls")
-    local formatting = null_ls.builtins.formatting
-    local diagnostics = null_ls.builtins.diagnostics
     null_ls.setup({
+      on_attach = function(client, bufnr)
+        -- Add auto-formatting
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({
+            group = lsp_fmt_au_group,
+            buffer = bufnr,
+          })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = lsp_fmt_au_group,
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          })
+        end
+      end,
       sources = {
-        formatting.stylua,
-        formatting.clang_format,
-        formatting.cmake_format,
-        formatting.prettier,
-        formatting.autopep8,
-        formatting.xmlformat,
-        diagnostics.cpplint,
-        diagnostics.flake8,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.prettier,
       },
     })
-  end,
 
-  vim.api.nvim_create_user_command("Format", function()
-    vim.lsp.buf.format({ async = true })
-  end, {
-    bang = true,
-  }),
+    vim.api.nvim_create_user_command("Format", function()
+      vim.lsp.buf.format({ async = true })
+    end, {
+      bang = true,
+    })
+  end,
 }

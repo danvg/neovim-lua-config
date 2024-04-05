@@ -54,7 +54,6 @@ return {
         tabline = {},
         inactive_tabline = {},
         winbar = {
-          -- lualine_c = { "%=%m %F" },
           lualine_c = { breadcrumbs },
         },
         inactive_winbar = {
