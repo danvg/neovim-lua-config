@@ -2,6 +2,18 @@ return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "p00f/nvim-ts-rainbow",
+    {
+      "windwp/nvim-ts-autotag",
+      config = function()
+        require("nvim-ts-autotag").setup({
+          enable = true,
+          enable_rename = true,
+          enable_close = true,
+          enable_close_on_slash = true,
+          filetypes = { "html", "typescriptreact" },
+        })
+      end,
+    },
   },
   event = { "BufRead", "BufEnter" },
   opts = {
