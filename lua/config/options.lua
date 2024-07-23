@@ -76,7 +76,7 @@ M.setup = function()
 
   -- Shell
   if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.opt.shell = "pwsh -NoLogo -NoProfile -ExecutionPolicy RemoteSigned"
+    vim.opt.shell = "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy RemoteSigned"
     vim.opt.shellcmdflag = "-Command"
     vim.opt.shellxquote = ""
   end

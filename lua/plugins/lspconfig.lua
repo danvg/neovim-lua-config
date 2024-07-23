@@ -43,6 +43,8 @@ return {
       },
     })
 
+    vim.g.navic_silence = true
+
     local lsp_opts = {
       on_attach = function(client, bufnr)
         require("nvim-navic").attach(client, bufnr)
