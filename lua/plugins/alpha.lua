@@ -10,27 +10,27 @@ return {
         theme.button("e", "  New file", "<cmd>ene <CR>"),
         theme.button(
           "SPC f f",
-          "  Find file",
+          "󰱼  Find file",
           "<cmd>Telescope find_files<CR>"
         ),
         theme.button(
           "SPC f g",
-          "  Find word",
+          "󱘢  Find word",
           "<cmd>Telescope live_grep<CR>"
         ),
         theme.button("SPC f n", "  Configuration"),
         theme.button(
           "r",
-          "  Recently opened files",
+          "󰤘  Recently opened files",
           "<cmd>Telescope oldfiles<CR>"
         ),
         theme.button(
           "l",
-          "  Open last session",
+          "  Open last session",
           "<cmd>SessionManager load_last_session<CR>"
         ),
         theme.button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
-        theme.button("q", "  Quit", "<cmd>qa<CR>"),
+        theme.button("q", "󰈆  Quit", "<cmd>qa<CR>"),
       },
       opts = {
         spacing = 1,

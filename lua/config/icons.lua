@@ -3,7 +3,7 @@ local M = {}
 M.diagnostics = {
   Error = " ",
   Warn = " ",
-  Hint = " ",
+  Hint = " ",
   Info = " ",
 }
 
@@ -11,6 +11,7 @@ M.git = {
   added = " ",
   modified = " ",
   removed = " ",
+  untracked = " ",
 }
 
 M.kinds = {
@@ -25,7 +26,7 @@ M.kinds = {
   Event = " ",
   Field = " ",
   File = " ",
-  Folder = " ",
+  Folder = " ",
   Function = " ",
   Interface = " ",
   Key = " ",
@@ -33,7 +34,7 @@ M.kinds = {
   Method = " ",
   Module = " ",
   Namespace = " ",
-  Null = "ﳠ ",
+  Null = "󰟢 ",
   Number = " ",
   Object = " ",
   Operator = " ",
