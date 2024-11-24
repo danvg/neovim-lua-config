@@ -3,7 +3,6 @@ local M = {}
 M.setup = function()
   -- Global options
   vim.opt.shortmess:append("atI")
-  vim.opt.incsearch = true
   vim.opt.ignorecase = true
   vim.opt.smartcase = true
   vim.opt.smarttab = true
@@ -36,12 +35,12 @@ M.setup = function()
   vim.opt.confirm = true
   vim.opt.virtualedit = "block"
   vim.opt.path:append(".,**")
-  vim.opt.wildignore:append("*/node_modules/*,*/__pycache__/*,*.class")
+  vim.opt.wildignore:append("*/node_modules/**,*/__pycache__/**,*.class")
   vim.opt.iskeyword:append("-")
 
   -- Window options
   vim.opt.number = true
-  vim.opt.relativenumber = true
+  vim.opt.relativenumber = false
   vim.opt.cursorline = true
   vim.opt.colorcolumn = "80"
   vim.opt.spell = false
@@ -52,10 +51,7 @@ M.setup = function()
   vim.opt.foldnestmax = 2
   vim.opt.foldcolumn = "1"
   vim.opt.foldlevelstart = 99 -- start with no folds
-
-  if vim.fn.has("nvim-0.8") == 1 then
-    vim.opt.winbar = "%=%m %F"
-  end
+  vim.opt.winbar = "%=%m %F"
 
   -- Buffer options
   local indent = 2
