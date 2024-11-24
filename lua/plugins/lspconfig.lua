@@ -29,7 +29,6 @@ return {
 
     mason_lspconfig.setup({
       ensure_installed = {
-        "als",
         "clangd",
         "cmake",
         "cssls",
@@ -38,7 +37,7 @@ return {
         "jsonls",
         "lua_ls",
         "pyright",
-        "tsserver",
+        "ts_ls",
         "vimls",
       },
     })
@@ -58,46 +57,6 @@ return {
     -- let null-ls take care of it
     lsp_opts.capabilities.document_formatting = false
     lsp_opts.capabilities.document_range_formatting = false
-
-    local function setup_als()
-      local als_opts = vim.tbl_extend("force", lsp_opts, {})
-
-      als_opts.cmd = {
-        vim.fn.exepath("ada_language_server"),
-      }
-
-      als_opts.on_init = function(client)
-        local available =
-          vim.fn.expand(client.config.root_dir .. "/*.gpr", true, true)
-
-        local chosen
-        if available == nil or #available == 0 then
-          chosen = nil
-        elseif #available == 1 then
-          chosen = available[1]
-        else
-          vim.notify("Selecting a project file...")
-          vim.ui.select(
-            available,
-            { prompt = "Select a project file:" },
-            function(choice)
-              if choice == nil then
-                chosen = available[1]
-              else
-                chosen = choice
-              end
-            end
-          )
-        end
-
-        client.config.settings = { ada = { projectFile = chosen } }
-        vim.notify("Using Ada project file: " .. chosen)
-        client.notify("workspace/didChangeConfiguration")
-        return true
-      end
-
-      require("lspconfig").als.setup(als_opts)
-    end
 
     local function setup_clangd()
       local clangd_opts = vim.tbl_extend("force", lsp_opts, {})
@@ -136,7 +95,6 @@ return {
       function(server)
         require("lspconfig")[server].setup(lsp_opts)
       end,
-      ["als"] = setup_als,
       ["clangd"] = setup_clangd,
       ["jdtls"] = function() end,
       ["lua_ls"] = setup_lua_ls,
