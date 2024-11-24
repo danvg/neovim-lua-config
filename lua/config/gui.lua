@@ -29,19 +29,19 @@ end
 
 local function increase_font_size()
   font.size = font.size + 1
-  print("Font size increase to " .. tostring(font.size))
+  vim.notify("Font size increase to " .. tostring(font.size))
   update_font()
 end
 
 local function decrease_font_size()
   font.size = font.size - 1
-  print("Font size decrease to " .. tostring(font.size))
+  vim.notify("Font size decrease to " .. tostring(font.size))
   update_font()
 end
 
 local function reset_font_size()
   font.size = default_font_size
-  print("Font size reset to " .. tostring(font.size))
+  vim.notify("Font size reset to " .. tostring(font.size))
   update_font()
 end
 
